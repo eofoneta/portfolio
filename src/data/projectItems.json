@@ -3,27 +3,23 @@
     "id": "01",
     "applicationName": "TaleWhirl",
     "imageUrl": "/talewhirl-image.png",
+    "videoUrl": "",
+    "hasVideo": false,
     "techStacks": [
       "SpringBoot",
       "Docker",
-      "Next js",
-      "Tailwind",
-      "Typescript",
-      "PostgresSql"
+      "PostgreSql",
+      "Render",
+      "Yaml",
+      "Spring Security"
     ],
-    "projectType": "fullstack Application",
+    "projectType": "Backend Server",
     "color": "#252525",
-    "link": "https://talewhirl.vercel.app/",
-    "githubProject": "https://github.com/Lordmaryo/Talewhirl",
-    "overview": "A fullstack web application with an engaging book social community where users can read, write, connect with authors and enhance their experience by following their favorite authors and commenting on books.",
-    "layouts": {
-      "docs": "In order to design a visually appealing and user-friendly interface for a book social network, it was important to keep in mind that the environment surrounding an activity as focused as reading requires a minimalistic and less distracting approach. A simple, easy to navigate style was essential",
-      "image1": "/talewhirl-image2.png",
-      "image2": "/talewhirl-image3.png",
-      "image3": "/talewhirl-image4.png"
-    },
+    "githubProject": "https://github.com/eofoneta/Talewhirl-bsn",
+    "isPrivateRepo": false,
+    "overview": "Talewhirl is an open-source API that powers an interactive book social platform. It provides everything you need to build an online community for book lovers, from writing and sharing books to user interaction.",
     "development": {
-      "docs": "The development of this project took about a month and a few days to complete. Initially, I was skeptical about whether to use React or Next.js for the frontend. However, I chose Next.js because of the extra features it provides, such as server-side rendering, inbuilt caching, and a simplified coding process, to name a few. For the backend, I used Spring Boot, a Java framework primarily designed for building complex, enterprise level software solutions. Although it presented several constraints during development, the final results were well worth the effort. For data storage, I used PostgreSQL, while Docker's powerful containerization capabilities proved useful throughout the process.",
+      "docs": "The development of this project took about a month and a few days to complete. Initially, I was skeptical about whether to use Express or Spring Boot for the Server. I finally came to the conclusion to use Spring Boot, a Java framework primarily designed for building complex, enterprise level software solutions. Although it presented several constraints during development, the final results were well worth the effort. For data storage, I used PostgreSQL, while Docker's powerful containerization capabilities proved useful throughout the process.",
       "image": ""
     },
     "interactions": {
@@ -35,11 +31,65 @@
       "image": ""
     },
     "security": {
-      "docs": "To ensure the application is secure and protected from vulnerabilities, a simple yet effective approach was implemented. During the signup process, users are required to provide their email, password, and other relevant details. A six-digit token is automatically generated and sent to the email provided. If the user enters the correct token, they are redirected to a login popup within three seconds, where they can log in to access their newly created account. Additionally, the system archives an auto-generated username on the server, assigning each user a unique identifier during signup. This ensures better security and user management. In the future, more security features will be introduced, such as allowing users to log in using their auto-generated usernames. Plans are also underway to integrate Google authentication to enhance account security further.",
+      "docs": "To ensure the application is secure and protected from vulnerabilities, a simple yet effective approach was implemented. During the signup process, users are required to provide their email, password, and other relevant details. A six-digit token is automatically generated and sent to the email provided. If the user enters the correct token, the account gets activated and they're allowed to interact with the application. Additionally, the system archives an auto-generated username on the server, assigning each user a unique identifier during signup. This ensures better security and user management. In the future, more security features will be introduced, such as allowing users to log in using their auto-generated usernames. Plans are also underway to integrate Google authentication to enhance account security further.",
       "image": ""
     },
     "learning": {
       "docs": "Building this project taught me many new things. One of the biggest was learning how to create complex search queries that give smooth and accurate results for users. The challenges I faced during development and production helped me understand how to deal with similar problems better in the future, and I’m grateful for finding solutions to them. I also learned the importance of error handling. It’s crucial to track issues that disrupt the program flow so you can figure out where problems come from and fix them quickly. These lessons will definitely come in handy to prevent them in future applications.",
+      "image": ""
+    }
+  },
+  {
+    "id": "02",
+    "applicationName": "VeridianGlow",
+    "imageUrl": "",
+    "videoUrl": "/veridianglow-video",
+    "hasVideo": true,
+    "techStacks": ["Typescript", "Express", "React Js", "MongoDb", "Docker"],
+    "projectType": "Fullstack Application",
+    "color": "#943971",
+    "githubProject": "",
+    "isPrivateRepo": true,
+    "overview": "VeridianGlow is a modern e-commerce store specializing in a wide range of cosmetics and skincare products. Designed with user experience in mind, it features intuitive navigation, customer product ratings, and all the essential tools you'd expect from a contemporary online shopping platform.",
+    "development": {
+      "docs": "This project took about three months to build. I handled everything myself—from the UI design and user experience to the frontend and backend. The backend was built with TypeScript, using Express for the Node.js setup because it had a lot of built-in features that made it easier to manage a complex app on my own. Redis was used for caching, which helped speed up the server and cut down hosting costs by around 60%. For the frontend, I used React.js along with Zustand for state management and TanStack React Query for its strong caching features, improving overall performance by about 10%.",
+      "image": ""
+    },
+    "interactions": {
+      "docs": "You might wonder why a video was used as the poster. When you visit the website, it opens with a video landing page. Before that, I asked myself, How can I make this landing page stand out? I didn’t want to build something basic. That’s when I came up with the idea of adding video to the landing page. Most e-commerce sites displays big posters or bulletins on their homepages and honestly, it’s a bit boring. The ones with beautiful video posters are usually high-end or luxury brands, and I wanted to bring that same kind of polish to this project. So, I compiled a few clips and created a quick 10-second video. I pitched the idea, and the client loved it. The final landing page loads fast in under two seconds.",
+      "image": ""
+    },
+    "complexities": {
+      "docs": "One of the biggest challenges I faced during development was integrating the payment system. I used Paystack as the payment provider, but their developer documentation was limited and difficult to work with, which made the process frustrating. To solve this, I did extensive research, digging through developer blogs and community posts from others who had previously worked with the platform. Eventually, I was able to overcome the issue and complete a smooth, reliable integration.",
+      "image": ""
+    },
+    "security": {
+      "docs": "For an e-commerce website, security is crucial. Only authenticated users are allowed to place orders, this helps protect the service and ensures orders can be tracked effectively. The authentication system is simple: you provide your full name, email, and password to sign up. If you already have an account, you can log in and place an order. However, unauthenticated users can still browse and navigate the website. Admins, on the other hand, are required to go through two-factor authentication (2FA) to secure the admin endpoints from unauthorized access.",
+      "image": ""
+    }
+  },
+  {
+    "id": "03",
+    "applicationName": "Quorix Ai",
+    "imageUrl": "quorix-ai.png",
+    "videoUrl": "",
+    "hasVideo": false,
+    "techStacks": ["Typescript", "Next.js", "DeepSeek", "PostgreSql"],
+    "projectType": "Fullstack Application",
+    "color": "#120A2D",
+    "githubProject": "https://github.com/eofoneta/Talewhirl-bsn",
+    "isPrivateRepo": true,
+    "overview": "Quorix AI is an AI-powered tool that humanizes text, essays, cover letters, and more. It helps make responses from ChatGPT and other LLM models sound more natural and human-like.",
+    "development": {
+      "docs": "This project didn’t take too long. I’ve been using Next.js for a few years, but I had never fully explored its full-stack capabilities. I decided to try out its API features, and overall, I’d say they’re solid. The best part is being able to build the entire application using a single stack—that’s what I find most exciting. For authentication, I used Clerk, and Postgres was used as the database.",
+      "image": ""
+    },
+    "interactions": {
+      "docs": "I chose a minimal design for the user interaction, inspired heavily by ChatGPT's Ui, which is already mainstream and widely recognized. When you load the website, the chat interface is immediately available and ready for your prompt, along with a few suggested options to guide the user.",
+      "image": ""
+    },
+    "security": {
+      "docs": "Clerk Auth was used for authentication. I wanted to try something different from a custom auth system, and Clerk did a great job handling it. The website is currently free to use, but that also opens the door to potential abuse or unnecessary server load. To manage this, I added a rate limiter that tracks how many prompts a user submits and restricts usage after a certain limit is reached for a set period of time. A payment method will be added soon, but for now, the project is still under active development.",
       "image": ""
     }
   }

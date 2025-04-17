@@ -31,7 +31,7 @@ const Footer = () => {
           </a>
         </div>
         <p className="w-full font-bold">
-          © 2024 Emmanuel ofoneta. All Rights Reserved.
+          © 2025 Emmanuel ofoneta. All Rights Reserved.
         </p>
       </div>
       <div className="w-[500px]">

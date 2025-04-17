@@ -12,29 +12,24 @@ interface Section {
   image: string;
 }
 
-interface LayoutsSection {
-  docs: string;
-  image1: string;
-  image2: string;
-  image3: string;
-}
-
-export interface projectsDescriptionProps {
+export interface ProjectsDescriptionProps {
   id: string;
   applicationName: string;
   imageUrl: string;
+  videoUrl: string;
+  hasVideo: boolean;
   techStacks: string[];
   projectType: string;
   color: string;
-  link: string;
+  link?: string;
   githubProject: string;
+  isPrivateRepo: boolean;
   overview: string;
-  layouts: LayoutsSection;
   development: Section;
   interactions: Section;
-  complexities: Section;
+  complexities?: Section;
   security: Section;
-  learning: Section;
+  learning?: Section;
 }
 
 const App = () => {

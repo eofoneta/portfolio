@@ -11,7 +11,7 @@ const NavBar = () => {
     const ctx = gsap.context(() => {
       const t1 = gsap.timeline();
       t1.from(["#nav-1", "#nav-2", "#nav-3", "#nav-4", "#logo-name"], {
-        y: "+=50",
+        y: "+=10",
         opacity: 0,
         duration: 0.4,
         delay: 0.5,
@@ -67,7 +67,7 @@ const NavBar = () => {
       <ul className="flex-row gap-5 hidden md:flex">
         <li id="nav-3">
           <a
-            href="/Resume1.pdf"
+            href="/Eofoneta-resume.pdf"
             target="_blank"
             className="flex flex-row gap-2 justify-center items-center transition-all duration-300 hover:text-shadow-glow"
           >
@@ -100,7 +100,7 @@ const NavBar = () => {
         <ul className="flex flex-col gap-5">
           <li id="nav-3">
             <a
-              href="/Resume1.pdf"
+              href="/Eofoneta-resume.pdf"
               target="_blank"
               className="flex flex-row gap-2 justify-center items-center transition-all duration-300 hover:text-shadow-glow"
             >

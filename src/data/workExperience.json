@@ -1,0 +1,20 @@
+[
+  {
+    "role": "Full-stack Engineer",
+    "duration": "Jan 2024 - present",
+    "info1": "Developed a full-fledged e-commerce platform using React and Express with TypeScript, leveraging Docker for seamless containerization.",
+    "info2": "Implemented Redis for session and product caching, improving backend performance by a significant margin, further reducing database load."
+  },
+  {
+    "role": "Software Developer",
+    "duration": "Oct 2024 - Jan 2025",
+    "info1": "Collaborated closely with backend engineers, leveraging my backend knowledge to streamline integration and improve overall development flow.",
+    "info2": "Actively participated in daily Scrum standups, communicating progress and aligning with cross-functional team goals."
+  },
+  {
+    "role": "System Administrator",
+    "duration": "May 2024 - May 2024",
+    "info1": "Leveraged deep knowledge of Command line interface (CLI) and system configuration to streamline a setup process typically difficult for non-experts.",
+    "info2": "Automated the installation process into a single command, eliminating the need for manual CLI steps."
+  }
+]

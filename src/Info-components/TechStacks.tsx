@@ -3,12 +3,13 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import { FaHtml5 } from "react-icons/fa";
-import { FaCss3, FaDocker, FaJava, FaReact } from "react-icons/fa6";
+import { FaCss3, FaDocker, FaJava, FaNodeJs, FaReact } from "react-icons/fa6";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { SiSpringboot, SiTypescript } from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { DiMysql } from "react-icons/di";
+import { GiSadCrab } from "react-icons/gi";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,8 +94,16 @@ const TechStacks = () => {
               <FaJava size={30} />
             </li>
             <li className="flex flex-row items-center justify-between px-2 border-b-[1px] border-[#dcd2cda8]">
+              <span>Rust</span>
+              <GiSadCrab />
+            </li>
+            <li className="flex flex-row items-center justify-between px-2 border-b-[1px] border-[#dcd2cda8]">
               <span>Spring boot</span>
               <SiSpringboot size={30} />
+            </li>
+            <li className="flex flex-row items-center justify-between px-2 border-b-[1px] border-[#dcd2cda8]">
+              <span>Node Js / Express</span>
+              <FaNodeJs size={30} />
             </li>
             <li className="flex flex-row items-center justify-between px-2 border-b-[1px] border-[#dcd2cda8]">
               <span>Postgres SQL</span>

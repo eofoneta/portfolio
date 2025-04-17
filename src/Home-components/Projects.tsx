@@ -4,10 +4,10 @@ import SplitType from "split-type";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
-import { projectsDescriptionProps } from "../App";
+import { ProjectsDescriptionProps } from "../App";
 
 type Projectsprops = {
-  projects: projectsDescriptionProps[];
+  projects: ProjectsDescriptionProps[];
 };
 
 gsap.registerPlugin(ScrollTrigger);

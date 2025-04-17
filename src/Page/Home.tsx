@@ -1,7 +1,7 @@
 import Contact from "../Components/Contact";
 import Hero from "../Home-components/Hero";
 import Results from "../Home-components/Projects";
-import WhyHireMe from "../Home-components/WhyHireMe";
+import WhyHireMe from "../Home-components/WorkExperience";
 import ProjectItems from "../data/projectItems.json";
 
 const Home = () => {

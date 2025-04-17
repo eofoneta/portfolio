@@ -1,11 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectItems from "../../../data/projectItems.json";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { projectsDescriptionProps } from "../../../App";
+import { ProjectsDescriptionProps } from "../../../App";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import VideoBanner from "../../../Components/VideoBanner";
 
 const ProjectDescription = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const ProjectDescription = () => {
 
   const project = ProjectItems.find(
     (project) => project.id === id
-  ) as projectsDescriptionProps;
+  ) as ProjectsDescriptionProps;
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
@@ -71,12 +72,19 @@ const ProjectDescription = () => {
           >
             {project.applicationName}
           </h1>
-          <img
-            className="w-[700px] mx-auto z-20 relative opacity-90"
-            id="description-img"
-            src={project.imageUrl}
-            alt={project.applicationName}
-          />
+          {project.hasVideo ? (
+            <VideoBanner
+              videoPath={project.videoUrl}
+              className="max-w-[700px] mx-auto z-20 relative opacity-90"
+            />
+          ) : (
+            <img
+              className="w-[700px] mx-auto z-20 relative opacity-90"
+              id="description-img"
+              src={project.imageUrl}
+              alt={project.applicationName}
+            />
+          )}
         </div>
         <div className="flex flex-row justify-between relative">
           <aside className="hidden lg:block w-40 fixed top-[40%]">
@@ -91,12 +99,6 @@ const ProjectDescription = () => {
                 Overview
               </a>
               <a
-                href="#layouts"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                layouts
-              </a>
-              <a
                 href="#development"
                 className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
               >
@@ -108,43 +110,60 @@ const ProjectDescription = () => {
               >
                 Interactions
               </a>
-              <a
-                href="#complexities"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                complexities
-              </a>
+              {project.complexities && (
+                <a
+                  href="#complexities"
+                  className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
+                >
+                  complexities
+                </a>
+              )}
               <a
                 href="#security"
                 className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
               >
                 Security
               </a>
-              <a
-                href="#learnings"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                learnings
-              </a>
+              {project.learning && (
+                <a
+                  href="#learnings"
+                  className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
+                >
+                  learnings
+                </a>
+              )}
             </div>
           </aside>
-          <div className="sm:max-w-[700px] mx-auto w-[900px] lg:mx-auto">
+          <div className="w-[700px] mx-auto">
             <div className="flex-wrap sm:flex-nowrap w-full flex items-center justify-center gap-5">
-              <Link
-                className="flex items-center justify-center font-bold border md:w-[50%] w-[100%] py-2 hover:bg-[#dcd2cd] hover:text-black transition-all duration-300"
-                target="_blank"
-                to={project.link}
-              >
-                <span className="mr-2">View project</span>
-              </Link>
-              <Link
-                to={project.githubProject}
-                target="_blank"
-                className="flex items-center justify-center font-bold border md:w-[50%] w-[100%] py-2 text-black bg-[#dcd2cd] hover:bg-[#dcd2cdb2] transition-all duration-300"
-              >
-                <span className="mr-2">Source code</span>
-                <FaGithub />
-              </Link>
+              {project.link && (
+                <Link
+                  className="flex items-center justify-center font-bold border w-[100%] py-2 hover:bg-[#dcd2cd] hover:text-black transition-all duration-300"
+                  target="_blank"
+                  to={project.link}
+                >
+                  <span className="mr-2">View project</span>
+                </Link>
+              )}
+              {!project.isPrivateRepo && (
+                <Link
+                  to={project.githubProject}
+                  target="_blank"
+                  className="flex items-center justify-center font-bold border w-full py-2 text-black bg-[#dcd2cd] hover:bg-[#dcd2cdb2] transition-all"
+                >
+                  <span className="mr-2">Source code</span>
+                  <FaGithub />
+                </Link>
+              )}
+              {project.isPrivateRepo && (
+                <button
+                  disabled
+                  className="disabled:opacity-50 flex items-center justify-center font-bold border w-full py-2 text-black bg-[#dcd2cd]"
+                >
+                  <span className="mr-2">Private Repo</span>
+                  <FaGithub />
+                </button>
+              )}
             </div>
             <div
               id="overview"
@@ -167,32 +186,6 @@ const ProjectDescription = () => {
                 <p>{project.overview}</p>
               </div>
             </div>
-            <div className="pt-5 lg:pt-10" id="layouts">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Visual layouts
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                Keeping it minimal and not losing it's cohesiveness
-              </h2>
-              <p className="mb-4">{project.layouts.docs}</p>
-              <div className="space-y-4">
-                <img
-                  className="rounded-xl"
-                  src={project.layouts.image1}
-                  alt="image design"
-                />
-                <img
-                  className="rounded-xl"
-                  src={project.layouts.image2}
-                  alt="image design"
-                />
-                <img
-                  className="rounded-xl"
-                  src={project.layouts.image3}
-                  alt="image design"
-                />
-              </div>
-            </div>
             <div className="pt-5 lg:pt-10" id="development">
               <h2 className="text-2xl font-light hidden lg:block">
                 Development
@@ -212,15 +205,17 @@ const ProjectDescription = () => {
               <p className="mb-4">{project.interactions.docs}</p>
             </div>
 
-            <div className="pt-5 lg:pt-10" id="complexities">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Solving complexities
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                Bugs, roadblocks and pile of constraints
-              </h2>
-              <p className="mb-4">{project.complexities.docs}</p>
-            </div>
+            {project.complexities && (
+              <div className="pt-5 lg:pt-10" id="complexities">
+                <h2 className="text-2xl font-light hidden lg:block">
+                  Solving complexities
+                </h2>
+                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
+                  Bugs, roadblocks and pile of constraints
+                </h2>
+                <p className="mb-4">{project.complexities.docs}</p>
+              </div>
+            )}
 
             <div className="pt-5 lg:pt-10" id="security">
               <h2 className="text-2xl font-light hidden lg:block">
@@ -232,15 +227,17 @@ const ProjectDescription = () => {
               <p className="mb-4">{project.security.docs}</p>
             </div>
 
-            <div className="pt-5 lg:pt-10" id="learnings">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Key learnings
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                Insights and knowledge gained from building the project
-              </h2>
-              <p className="mb-4">{project.learning.docs}</p>
-            </div>
+            {project.learning && (
+              <div className="pt-5 lg:pt-10" id="learnings">
+                <h2 className="text-2xl font-light hidden lg:block">
+                  Key learnings
+                </h2>
+                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
+                  Insights and knowledge gained from building the project
+                </h2>
+                <p className="mb-4">{project.learning.docs}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

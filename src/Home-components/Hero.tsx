@@ -21,7 +21,7 @@ const Hero = () => {
 
     gsap.to(".hero-char1", {
       y: 0,
-      duration: 0.5,
+      duration: 1,
       delay: 0.3,
       stagger: 0.01,
     });
@@ -70,13 +70,13 @@ const Hero = () => {
               className="hidden md:block quicksand-font text-lg sm:text-xl md:text-2xl"
               id="target-4"
             >
-              FullStack Engineer
+              Software Developer
             </p>
           </div>
         </div>
 
         <div className="flex flex-row justify-between items-center mt-20 md:mt-[7rem]">
-          <div className="italic md:text-xl font-bold sm:w[20%]">
+          <div className="italic md:text-base text-sm font-semibold sm:w[20%] opacity-60">
             Software developer based in Lagos, Nigeria.
           </div>
           <a href="#contact">

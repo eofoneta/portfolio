@@ -1,11 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
-import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { useRef, useState } from "react";
+import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { IoMail } from "react-icons/io5";
 
 gsap.registerPlugin(ScrollTrigger);
+
 const Contact = () => {
+  const [copied, setCopied] = useState(false);
   const scrollContactRef = useRef<HTMLHeadingElement | null>(null);
 
   useGSAP(() => {
@@ -28,6 +31,12 @@ const Contact = () => {
     );
   }, []);
 
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText("eofoneta@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Hide notification after 2s
+  };
+
   return (
     <div
       id="contact"
@@ -44,11 +53,19 @@ const Contact = () => {
         <p className="font-bold pb-4">eofoneta@gmail.com</p>
       </div>
       <div className="w-[500px] flex flex-row gap-x-4 justify-around">
-        <a href="https://instagram.com/notlordmaryo" 
-        className="hover:text-red-400 transition-colors"
-        target="_blank">
-          <FaInstagram size={30} />
-        </a>
+        <div className="relative inline-block">
+          <button
+            onClick={handleCopy}
+            className="hover:text-blue-400 transition-colors"
+          >
+            <IoMail size={30} />
+          </button>
+          {copied && (
+            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-black text-white text-sm px-3 py-1 rounded">
+              Copied!
+            </div>
+          )}
+        </div>
         <a href="https://x.com/lord_maryo" target="_blank">
           <FaXTwitter size={30} />
         </a>

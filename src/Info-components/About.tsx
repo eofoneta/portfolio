@@ -67,10 +67,9 @@ const About = () => {
             </h2>
             <p className="pb-4">
               My name is Emmanuel Ofoneta, and I’m based in Lagos, Nigeria. I’m
-              a software developer with a passion for building both frontend and
+              a software Engineer with a passion for building both frontend and
               backend technologies. My journey in tech has been shaped by a love
-              for learning and solving problems, always striving to improve my
-              skills and grow with every project I take on.
+              for learning and solving complex problems.
             </p>
             {/* <img src="/miles-morales.jpg" alt="photo of me" /> */}
           </div>
