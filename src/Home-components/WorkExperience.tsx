@@ -19,8 +19,8 @@ const WhyHireMe = () => {
         </div>
       </aside>
       <div className="sm:w-[50%] space-y-10">
-        {workExperienceData.map((item) => (
-          <div>
+        {workExperienceData.map((item, i) => (
+          <div key={i}>
             <div className="flex items-center justify-between">
               <h2 className="font-bold text-[#ffffffb2] text-xl mb-1">
                 {item.role}

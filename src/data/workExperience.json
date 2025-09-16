@@ -1,20 +1,44 @@
 [
   {
     "role": "Full-stack Engineer",
-    "duration": "Jan 2024 - present",
-    "info1": "Developed a full-fledged e-commerce platform using React and Express with TypeScript, leveraging Docker for seamless containerization.",
-    "info2": "Implemented Redis for session and product caching, improving backend performance by a significant margin, further reducing database load."
+    "duration": "Aug 2025 – Present",
+    "info1": "Migrating a large scale Node.js application written in legacy CommonJS to modern standards and transitioned the backend from RethinkDB to MySQL, improving query performance and long-term maintainability.",
+    "info2": "Partnered with the team lead to optimize frontend performance and integrate weserv.nl for sharper, faster-loading thumbnails, reducing image load times by 40%."
+  },
+  {
+    "role": "Senior Backend Engineer (Contract)",
+    "duration": "Jul 2025 – Aug 2025",
+    "info1": "Led development of Ezra, an internal AI tool that translates natural language into machine-executable actions, improving developer productivity.",
+    "info2": "Integrated third-party SaaS services and incident management workflows to automate alerts, track failed deployments, and ensure operational reliability."
+  },
+  {
+    "role": "Co-founder / CTO",
+    "duration": "Jun 2025 – Aug 2025",
+    "info1": "Architected and oversaw the entire engineering workflow, leading product and technical strategy for a developer tooling startup focused on automation, AI, and containerized deployment.",
+    "info2": "Oversaw end-to-end delivery of MVPs including backend APIs, frontend dashboards, and developer documentation."
+  },
+  {
+    "role": "Full-stack Engineer",
+    "duration": "Jan 2024 – Apr 2025",
+    "info1": "Developed a full-fledged e-commerce platform using React and TypeScript (Express.js), containerized with Docker.",
+    "info2": "Optimized caching with Redis and frontend improvements, cutting server costs by 60% while boosting performance."
+  },
+  {
+    "role": "Backend Engineer (Freelance)",
+    "duration": "Apr 2024 – Jun 2024",
+    "info1": "Contributed to the PartnerStack codebase by building features and improving backend reliability using Spring Boot and PostgreSQL.",
+    "info2": "Collaborated remotely with full-time engineers to deliver APIs handling onboarding, tracking, and commission logic at scale."
+  },
+  {
+    "role": "System Automation Engineer",
+    "duration": "May 2024",
+    "info1": "Automated the CLI-based installation of AI facial recognition and avatar-swapping tools.",
+    "info2": "Streamlined manual setup processes into a single-command script for non-technical users."
   },
   {
     "role": "Software Developer",
-    "duration": "Oct 2024 - Jan 2025",
-    "info1": "Collaborated closely with backend engineers, leveraging my backend knowledge to streamline integration and improve overall development flow.",
-    "info2": "Actively participated in daily Scrum standups, communicating progress and aligning with cross-functional team goals."
-  },
-  {
-    "role": "System Administrator",
-    "duration": "May 2024 - May 2024",
-    "info1": "Leveraged deep knowledge of Command line interface (CLI) and system configuration to streamline a setup process typically difficult for non-experts.",
-    "info2": "Automated the installation process into a single command, eliminating the need for manual CLI steps."
+    "duration": "Jan 2024 – Mar 2024",
+    "info1": "Collaborated with backend engineers to streamline integration using shared API contracts.",
+    "info2": "Built responsive, pixel-perfect UIs from Figma, while actively participating in Scrum standups to align with team goals."
   }
 ]

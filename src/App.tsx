@@ -32,6 +32,10 @@ export interface ProjectsDescriptionProps {
   learning?: Section;
 }
 
+/**
+ * TODO - change design for landing page
+ */
+
 const App = () => {
   const location = useLocation();
   const isProjectDescription = location.pathname.startsWith("/project");
