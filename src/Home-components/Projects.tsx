@@ -35,20 +35,48 @@ const Projects = ({ projects }: Projectsprops) => {
         },
       }
     );
+
+    gsap.utils.toArray<Element>(".project-card").forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          ease: "power2.out",
+          delay: i * 0.08,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            once: true,
+          },
+        }
+      );
+    });
   }, []);
 
   return (
     <div className="py-10">
-      <h1
+      <div
         ref={triggerRef}
-        className="overflow-hidden lg:my-16 md:my-14 my-8 oswald-font text-3xl md:text-5xl lg:text-7xl text-center text-[#ffffffe2]"
-        id="text"
+        className="overflow-hidden px-5 lg:my-16 md:my-14 my-8 flex items-end justify-between border-b border-[#7a1c2e30] pb-4"
       >
-        Selected Works
-      </h1>
+        <h1
+          id="text"
+          className="oswald-font text-3xl md:text-5xl lg:text-7xl text-[#ffffffe2]"
+        >
+          Selected Works
+        </h1>
+        <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] hidden sm:block">
+          {projects.length} projects
+        </p>
+      </div>
       <div>
-        {projects?.map((result) => (
-          <Card key={result.id} projects={result} />
+        {projects?.map((result, i) => (
+          <div key={result.id} className="project-card">
+            <Card projects={result} index={i} />
+          </div>
         ))}
       </div>
     </div>

@@ -22,7 +22,7 @@ const Footer = () => {
             Twitter
           </a>
           <a
-            href="https://www.github.com/lordmaryo"
+            href="https://www.github.com/eofoneta"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-shadow-glow"
@@ -31,7 +31,7 @@ const Footer = () => {
           </a>
         </div>
         <p className="w-full font-bold">
-          © 2025 Emmanuel ofoneta. All Rights Reserved.
+          © 2026 Emmanuel ofoneta. All Rights Reserved.
         </p>
       </div>
       <div className="w-[500px]">

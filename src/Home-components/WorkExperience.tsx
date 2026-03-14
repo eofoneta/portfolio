@@ -1,34 +1,81 @@
 import workExperienceData from "../data/workExperience.json";
-import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 
-const WhyHireMe = () => {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+gsap.registerPlugin(ScrollTrigger);
+
+const WorkExperience = () => {
+  useGSAP(() => {
+    gsap.utils.toArray<Element>(".work-item").forEach((el, i) => {
+      gsap.fromTo(
+        el,
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 92%",
+            once: true,
+          },
+          delay: i * 0.04,
+        }
+      );
+    });
+  }, []);
 
   return (
-    <div className="my-10 flex flex-row lg:justify-center flex-wrap px-5 md:flex-nowrap items-center w-full">
-      <aside className="sm:w-[50%] md:ml-20 flex flex-row md:h-[200px] items-center gap-4">
-        <div className="h-full bg-[#dcd2cd] w-[2px] hidden sm:block"></div>
-        <div
-          ref={scrollRef}
-          className="space-x-2 mb-4 md:space-x-0 md:flex flex-col gap-2 text-2xl lg:text-6xl md:text-4xl sm:text-2xl oswald-font"
-        >
-          <span id="span">Work</span>
-          <span className="overflow-clip" id="span">
-            experience
-          </span>
+    <div className="pt-20 md:my-[200px] flex flex-col sm:flex-row sm:justify-between gap-5 sm:gap-x-20 px-5">
+      {/* SIDEBAR */}
+      <div className="flex flex-row gap-4 sm:h-[80px] md:h-[130px] sm:sticky top-[20%]">
+        <div className="h-full bg-[#dcd2cd] w-[2px] sm:block hidden" />
+        <div className="overflow-y-hidden max-w-[500px] oswald-font text-xl lg:text-6xl md:text-4xl sm:text-2xl">
+          <span>Work</span>
+          <br className="sm:block hidden" />
+          <span className="overflow-clip">Experience</span>
         </div>
-      </aside>
-      <div className="sm:w-[50%] space-y-10">
+      </div>
+
+      {/* ENTRIES */}
+      <div className="sm:w-[50%] space-y-0">
         {workExperienceData.map((item, i) => (
-          <div key={i}>
-            <div className="flex items-center justify-between">
-              <h2 className="font-bold text-[#ffffffb2] text-xl mb-1">
-                {item.role}
-              </h2>
-              <p className="text-sm italic opacity-60 pr-2">{item.duration}</p>
+          <div
+            key={i}
+            className="work-item relative group border-b border-[#ffffff0f] py-6 hover:bg-[#7a1c2e08] transition-all duration-300 px-3 -mx-3"
+          >
+            {/* top row */}
+            <div className="flex items-start justify-between gap-4 mb-3">
+              <div className="flex items-start gap-4">
+                {/* index */}
+                <span className="oswald-light text-xs text-[#a19b98] tabular-nums pt-1 w-5 shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {/* role */}
+                <h2 className="oswald-font uppercase tracking-wide text-lg lg:text-2xl md:text-xl group-hover:text-white transition-colors duration-300 leading-tight">
+                  {item.role}
+                </h2>
+              </div>
+              {/* duration pill */}
+              <span className="oswald-light text-xs uppercase tracking-widest text-[#7a1c2e] border border-[#7a1c2e40] px-2 py-1 shrink-0 group-hover:border-[#7a1c2e90] transition-all duration-300">
+                {item.duration}
+              </span>
             </div>
-            <p className="mb-2">{item.info1}</p>
-            <p>{item.info2}</p>
+
+            {/* body */}
+            <div className="pl-9 space-y-1.5">
+              <p className="quicksand-text text-sm text-[#a19b98] leading-relaxed group-hover:text-[#dcd2cd] transition-colors duration-300">
+                {item.info1}
+              </p>
+              <p className="quicksand-text text-sm text-[#a19b98] leading-relaxed group-hover:text-[#dcd2cd] transition-colors duration-300">
+                {item.info2}
+              </p>
+            </div>
+
+            {/* accent line on left — visible on hover */}
+            <div className="absolute left-0 top-0 h-full w-[2px] bg-[#7a1c2e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         ))}
       </div>
@@ -36,4 +83,4 @@ const WhyHireMe = () => {
   );
 };
 
-export default WhyHireMe;
+export default WorkExperience;

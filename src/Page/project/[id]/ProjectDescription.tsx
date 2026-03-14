@@ -1,12 +1,40 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectItems from "../../../data/projectItems.json";
-import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { ProjectsDescriptionProps } from "../../../App";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import VideoBanner from "../../../Components/VideoBanner";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Section = ({
+  id,
+  index,
+  label,
+  heading,
+  children,
+}: {
+  id: string;
+  index: string;
+  label: string;
+  heading: string;
+  children: React.ReactNode;
+}) => (
+  <div id={id} className="section-block pt-16 border-t border-[#ffffff08]">
+    <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] mb-1">
+      {index} — {label}
+    </p>
+    <h2 className="oswald-font uppercase text-xl lg:text-2xl text-white mb-4 leading-tight">
+      {heading}
+    </h2>
+    <div className="quicksand-text text-sm text-[#a19b98] leading-relaxed">
+      {children}
+    </div>
+  </div>
+);
 
 const ProjectDescription = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +42,7 @@ const ProjectDescription = () => {
 
   const currentIndex = ProjectItems.findIndex((project) => project.id === id);
   const nextIndex = (currentIndex + 1) % ProjectItems.length;
-  const nextProjectId = ProjectItems[nextIndex].id;
+  const nextProject = ProjectItems[nextIndex];
 
   const project = ProjectItems.find(
     (project) => project.id === id
@@ -22,222 +50,250 @@ const ProjectDescription = () => {
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      const t1 = gsap.timeline();
-      t1.from(["#description-header", "#description-img"], {
-        y: 100,
-        opacity: 0,
-        duration: 0.5,
-        delay: 0.5,
-        stagger: 0.1,
-      }).to(["#description-header", "#description-img"], {
-        y: 0,
-        opacity: 1,
+      gsap.fromTo(
+        ["#desc-meta", "#desc-title", "#desc-media"],
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.12, delay: 0.2, ease: "power3.out" }
+      );
+
+      gsap.utils.toArray<Element>(".section-block").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { y: 30, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 0.55, ease: "power2.out",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          }
+        );
       });
     });
-
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className="py-20 px-5 sm:px-10 md:px-20 w-full relative">
+    <div className="min-h-screen w-full relative">
+
+      {/* project-colour ambient glow */}
       <div
-        style={{
-          background: project.color,
-        }}
-        className="opacity-60 md:opacity-50 w-full h-[600px] md:w-[700px] lg:w-[1000px] md:h-[700px] lg:h-[1000px] absolute top-[10%] md:top-[10%] lg:top-[16%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-      ></div>
-      <div>
-        <div className="flex flex-row justify-between sticky top-0 z-30 py-4">
-          <button
-            onClick={() => navigate("/")}
-            className="flex items-center hover:text-shadow-glow font-bold"
-          >
-            <FaArrowLeftLong className="mr-2" />
-            <span>Home</span>
-          </button>
-          <button
-            onClick={() => navigate(`/project/${nextProjectId}`)}
-            className="flex items-center hover:text-shadow-glow font-bold"
-          >
-            <span>Next</span>
-            <FaArrowRightLong className="ml-2" />
-          </button>
-        </div>
-        <div className="max-w-[800px] mx-auto relative mt-20 mb-10">
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
+        style={{ background: project.color }}
+      />
+
+      {/* ── STICKY NAV BAR ── */}
+      <div className="sticky top-0 z-30 backdrop-blur-sm border-b border-[#ffffff08] px-5 sm:px-10 md:px-20 py-4 flex justify-between items-center">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest text-[#a19b98] hover:text-[#c9566a] transition-colors duration-300 group"
+        >
+          <FaArrowLeftLong size={11} className="group-hover:-translate-x-0.5 transition-transform duration-300" />
+          <span>Home</span>
+        </button>
+
+        <p className="oswald-font uppercase text-sm hidden sm:block tracking-wide">
+          {project.applicationName}
+        </p>
+
+        <button
+          onClick={() => navigate(`/project/${nextProject.id}`)}
+          className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest text-[#a19b98] hover:text-[#c9566a] transition-colors duration-300 group"
+        >
+          <span>Next project</span>
+          <FaArrowRightLong size={11} className="-rotate-45 group-hover:translate-x-0.5 transition-transform duration-300" />
+        </button>
+      </div>
+
+      <div className="px-5 sm:px-10 md:px-20 pb-32 relative">
+
+        {/* ── HERO HEADER ── */}
+        <div className="max-w-[760px] mx-auto pt-16 pb-10">
+
+          {/* meta row */}
+          <div id="desc-meta" className="flex items-center gap-3 mb-6 flex-wrap">
+            <span className="oswald-light uppercase text-[10px] tracking-widest text-[#7a1c2e] border border-[#7a1c2e40] px-2 py-1">
+              {project.projectType}
+            </span>
+            {project.techStacks.slice(0, 3).map((t, i) => (
+              <span key={i} className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] border border-[#ffffff10] px-2 py-1">
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* title */}
           <h1
-            id="description-header"
-            className="sigmar-one-regular text-center absolute -top-10 md:-top-[4.5rem] left-1/2 transform -translate-x-1/2 uppercase text-xl md:text-3xl lg:text-5xl z-10 bg-opacity-50"
+            id="desc-title"
+            className="oswald-font uppercase text-4xl md:text-6xl lg:text-7xl text-white leading-[1.0] mb-8"
           >
             {project.applicationName}
           </h1>
-          {project.hasVideo ? (
-            <VideoBanner
-              videoPath={project.videoUrl}
-              className="max-w-[700px] mx-auto z-20 relative opacity-90"
+
+          {/* CTA buttons */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            {project.link && (
+              <Link
+                to={project.link}
+                target="_blank"
+                className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 border border-[#dcd2cd40] hover:border-[#7a1c2e] hover:text-[#c9566a] transition-all duration-300"
+              >
+                <span>View live</span>
+                <FaArrowRightLong size={10} className="-rotate-45" />
+              </Link>
+            )}
+            {!project.isPrivateRepo ? (
+              <Link
+                to={project.githubProject}
+                target="_blank"
+                className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 bg-[#dcd2cd] text-black hover:bg-[#c9566a] hover:text-white transition-all duration-300"
+              >
+                <span>Source code</span>
+                <FaGithub size={13} />
+              </Link>
+            ) : (
+              <button
+                disabled
+                className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 bg-[#dcd2cd20] text-[#a19b98] cursor-not-allowed"
+              >
+                <span>Private repo</span>
+                <FaGithub size={13} />
+              </button>
+            )}
+          </div>
+
+          {/* media */}
+          <div id="desc-media" className="relative">
+            <div
+              className="absolute -inset-4 blur-3xl opacity-30 rounded-full"
+              style={{ background: project.color }}
             />
-          ) : (
-            <img
-              className="w-[700px] mx-auto z-20 relative opacity-90"
-              id="description-img"
-              src={project.imageUrl}
-              alt={project.applicationName}
-            />
-          )}
+            {project.hasVideo ? (
+              <VideoBanner
+                videoPath={project.videoUrl}
+                className="relative z-10 w-full border border-[#ffffff08]"
+              />
+            ) : (
+              <img
+                src={project.imageUrl}
+                alt={project.applicationName}
+                className="relative z-10 w-full border border-[#ffffff08]"
+                style={{ background: project.color }}
+              />
+            )}
+          </div>
         </div>
-        <div className="flex flex-row justify-between relative">
-          <aside className="hidden lg:block w-40 fixed top-[40%]">
-            <h2 className="lg:text-xl md:text-lg font-bold mb-4 opacity-50">
-              Contents
-            </h2>
-            <div className="flex flex-col gap-2 font-semibold text-sm">
-              <a
-                href="#overview"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                Overview
-              </a>
-              <a
-                href="#development"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                Development
-              </a>
-              <a
-                href="#interaction"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                Interactions
-              </a>
-              {project.complexities && (
-                <a
-                  href="#complexities"
-                  className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-                >
-                  complexities
-                </a>
-              )}
-              <a
-                href="#security"
-                className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-              >
-                Security
-              </a>
-              {project.learning && (
-                <a
-                  href="#learnings"
-                  className="opacity-50 hover:opacity-100 hover:text-shadow-glow transition-all"
-                >
-                  learnings
-                </a>
-              )}
+
+        {/* ── CONTENT + SIDEBAR ── */}
+        <div className="max-w-[760px] mx-auto flex gap-16 relative">
+
+          {/* sticky sidebar TOC */}
+          <aside className="hidden lg:block w-36 shrink-0">
+            <div className="sticky top-24">
+              <p className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-4">
+                Contents
+              </p>
+              <nav className="flex flex-col gap-2.5">
+                {[
+                  { href: "#overview", label: "Overview" },
+                  { href: "#development", label: "Development" },
+                  { href: "#interaction", label: "Interactions" },
+                  ...(project.complexities ? [{ href: "#complexities", label: "Complexities" }] : []),
+                  { href: "#security", label: "Security" },
+                  ...(project.learning ? [{ href: "#learnings", label: "Learnings" }] : []),
+                ].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] hover:text-[#c9566a] transition-colors duration-200"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
             </div>
           </aside>
-          <div className="w-[700px] mx-auto">
-            <div className="flex-wrap sm:flex-nowrap w-full flex items-center justify-center gap-5">
-              {project.link && (
-                <Link
-                  className="flex items-center justify-center font-bold border w-[100%] py-2 hover:bg-[#dcd2cd] hover:text-black transition-all duration-300"
-                  target="_blank"
-                  to={project.link}
-                >
-                  <span className="mr-2">View project</span>
-                </Link>
-              )}
-              {!project.isPrivateRepo && (
-                <Link
-                  to={project.githubProject}
-                  target="_blank"
-                  className="flex items-center justify-center font-bold border w-full py-2 text-black bg-[#dcd2cd] hover:bg-[#dcd2cdb2] transition-all"
-                >
-                  <span className="mr-2">Source code</span>
-                  <FaGithub />
-                </Link>
-              )}
-              {project.isPrivateRepo && (
-                <button
-                  disabled
-                  className="disabled:opacity-50 flex items-center justify-center font-bold border w-full py-2 text-black bg-[#dcd2cd]"
-                >
-                  <span className="mr-2">Private Repo</span>
-                  <FaGithub />
-                </button>
-              )}
-            </div>
-            <div
-              id="overview"
-              className="flex-wrap sm:flex-nowrap w-full flex gap-5 justify-between mt-5 lg:pt-5"
-            >
-              <div className="md:w-1/2 w-full">
-                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
+
+          {/* main content */}
+          <div className="flex-1 min-w-0 space-y-0">
+
+            {/* overview + tech */}
+            <div id="overview" className="section-block pt-16 border-t border-[#ffffff08]">
+              <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] mb-1">
+                01 — Overview
+              </p>
+              <h2 className="oswald-font uppercase text-xl lg:text-2xl text-white mb-6 leading-tight">
+                What is {project.applicationName}?
+              </h2>
+              <p className="quicksand-text text-sm text-[#a19b98] leading-relaxed mb-8">
+                {project.overview}
+              </p>
+
+              {/* tech stack inline */}
+              <div>
+                <p className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-3">
                   Technology used
-                </h2>
-                <ul>
-                  {project.techStacks.map((item, index) => (
-                    <li key={index}>{item}</li>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.techStacks.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="oswald-light uppercase text-[10px] tracking-widest px-2 py-1 border border-[#ffffff10] text-[#a19b98]"
+                    >
+                      {tech}
+                    </span>
                   ))}
-                </ul>
-              </div>
-              <div className=" md:w-1/2 w-full">
-                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                  Overview
-                </h2>
-                <p>{project.overview}</p>
+                </div>
               </div>
             </div>
-            <div className="pt-5 lg:pt-10" id="development">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Development
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                The building stage and process
-              </h2>
-              <p className="mb-4">{project.development.docs}</p>
-            </div>
-            <div className="pt-5 lg:pt-10" id="interaction">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Interactions
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                Seamless user interactions and experiences
-              </h2>
-              <p className="mb-4">{project.interactions.docs}</p>
-            </div>
+
+            <Section id="development" index="02" label="Development" heading="The building stage and process">
+              <p>{project.development.docs}</p>
+            </Section>
+
+            <Section id="interaction" index="03" label="Interactions" heading="Seamless user interactions and experiences">
+              <p>{project.interactions.docs}</p>
+            </Section>
 
             {project.complexities && (
-              <div className="pt-5 lg:pt-10" id="complexities">
-                <h2 className="text-2xl font-light hidden lg:block">
-                  Solving complexities
-                </h2>
-                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                  Bugs, roadblocks and pile of constraints
-                </h2>
-                <p className="mb-4">{project.complexities.docs}</p>
-              </div>
+              <Section id="complexities" index="04" label="Complexities" heading="Bugs, roadblocks and pile of constraints">
+                <p>{project.complexities.docs}</p>
+              </Section>
             )}
 
-            <div className="pt-5 lg:pt-10" id="security">
-              <h2 className="text-2xl font-light hidden lg:block">
-                Security measures
-              </h2>
-              <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                Ensuring the application is secure from vulnerabilities
-              </h2>
-              <p className="mb-4">{project.security.docs}</p>
-            </div>
+            <Section
+              id="security"
+              index={project.complexities ? "05" : "04"}
+              label="Security"
+              heading="Ensuring the application is secure from vulnerabilities"
+            >
+              <p>{project.security.docs}</p>
+            </Section>
 
             {project.learning && (
-              <div className="pt-5 lg:pt-10" id="learnings">
-                <h2 className="text-2xl font-light hidden lg:block">
-                  Key learnings
-                </h2>
-                <h2 className="mb-2 text-lg md:text-xl lg:text2xl font-bold">
-                  Insights and knowledge gained from building the project
-                </h2>
-                <p className="mb-4">{project.learning.docs}</p>
-              </div>
+              <Section
+                id="learnings"
+                index={project.complexities ? "06" : "05"}
+                label="Key Learnings"
+                heading="Insights and knowledge gained from building the project"
+              >
+                <p>{project.learning.docs}</p>
+              </Section>
             )}
+
+            {/* next project footer */}
+            <div className="pt-20 border-t border-[#ffffff08] mt-16">
+              <p className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-2">
+                Next project
+              </p>
+              <button
+                onClick={() => navigate(`/project/${nextProject.id}`)}
+                className="group flex items-center gap-3 oswald-font uppercase text-2xl lg:text-3xl text-white hover:text-[#c9566a] transition-colors duration-300"
+              >
+                {nextProject.applicationName}
+                <FaArrowRightLong
+                  size={16}
+                  className="-rotate-45 group-hover:translate-x-1 transition-transform duration-300"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>

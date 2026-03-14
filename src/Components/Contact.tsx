@@ -32,9 +32,9 @@ const Contact = () => {
   }, []);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText("eofoneta@gmail.com");
+    await navigator.clipboard.writeText("emmanuel@eofoneta.com");
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // Hide notification after 2s
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -50,7 +50,12 @@ const Contact = () => {
         >
           Contact
         </h1>
-        <p className="font-bold pb-4">eofoneta@gmail.com</p>
+        <a
+          href="mailto:emmanuel@eofoneta.com"
+          className="font-bold pb-4 hover:text-[#7a1c2e] transition-colors duration-300"
+        >
+          emmanuel@eofoneta.com
+        </a>
       </div>
       <div className="w-[500px] flex flex-row gap-x-4 justify-around">
         <div className="relative inline-block">
@@ -66,7 +71,7 @@ const Contact = () => {
             </div>
           )}
         </div>
-        <a href="https://x.com/lord_maryo" target="_blank">
+        <a href="https://x.com/hustware" target="_blank">
           <FaXTwitter size={30} />
         </a>
         <a

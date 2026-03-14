@@ -46,13 +46,20 @@ const App = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  // Dismiss loader only when the page is fully loaded (images, fonts, assets)
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 500);
 
-    return () => clearTimeout(timer);
+    const handleLoaded = () => setLoading(false);
+
+    if (document.readyState === "complete") {
+      // Already loaded (e.g. cached page or fast navigation)
+      handleLoaded();
+    } else {
+      window.addEventListener("load", handleLoaded);
+    }
+
+    return () => window.removeEventListener("load", handleLoaded);
   }, [location.pathname]);
   return (
     <>

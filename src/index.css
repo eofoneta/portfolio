@@ -17,6 +17,7 @@ body {
   color: #dcd2cd;
   background-color: #000;
   transition: all 0.5;
+  --accent: #7a1c2e;
 }
 
 .oswald-font {
@@ -38,9 +39,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  transition: transform 0.5s;
-  transform: translateY(-40px);
-  line-height: 5.9rem;
+  line-height: 1.4;
 }
 
 .quicksand-text {
@@ -71,7 +70,37 @@ body {
 
 #target-1 {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-  line-height: 5.9rem;
+  line-height: 1.05;
+}
+
+/* fluid headline — scales with viewport, full-width so it never wraps */
+.hero-headline {
+  font-size: clamp(1.6rem, 3.6vw, 3.5rem);
+}
+
+/* reusable image frame — ::after renders inside its own stacking context, never clipped */
+.img-frame {
+  position: relative;
+  display: block;
+  overflow: visible;
+}
+
+.img-frame::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  pointer-events: none;
+  z-index: 10;
+  border: 3px solid transparent;
+  background: linear-gradient(135deg, #7a1c2e, #a8a8a8, #7a1c2e) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }
 
 #target-2 {
@@ -80,6 +109,7 @@ body {
 
 #target-4 {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  opacity: 0;
 }
 
 ::selection {

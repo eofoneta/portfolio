@@ -1,91 +1,203 @@
 import gsap from "gsap";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { IoIosMail } from "react-icons/io";
 import SplitType from "split-type";
+import FramedImage from "../Components/FramedImage";
+
+const MARQUEE_ITEMS = [
+  "Backend Engineering",
+  "API Integration",
+  "Spring Boot",
+  "Microservice Architecture",
+  "AI Integration",
+  "Node.js",
+  "PostgreSQL",
+  "Docker",
+  "System Design",
+  "Third-party APIs",
+];
 
 const Hero = () => {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    new SplitType("#target-1", {
-      types: "chars",
-      charClass: "hero-char1",
-    });
+    // --- text animations ---
+    new SplitType("#target-1", { types: "chars", charClass: "hero-char1" });
+    new SplitType("#target-3", { types: "chars", charClass: "hero-char3" });
 
-    new SplitType("#target-3", {
-      types: "chars",
-      charClass: "hero-char3",
-    });
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    gsap.set(".hero-char1", {
-      y: 100,
-    });
+    tl.set(".hero-char1", { y: 110, opacity: 0 })
+      .set("#hero-img-inner", { clipPath: "inset(100% 0% 0% 0%)", opacity: 0 })
+      .set("#hero-badge", { opacity: 0, scale: 0.8 })
+      .set("#target-4", { opacity: 0, y: -40 })
+      .set("#hero-bottom", { opacity: 0, y: 20 })
+      .to(".hero-char1", {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        delay: 0.2,
+        stagger: 0.012,
+      })
+      .to(
+        "#hero-img-inner",
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          opacity: 1,
+          duration: 1,
+          ease: "power4.inOut",
+        },
+        "-=0.5"
+      )
+      .to(
+        "#target-4",
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.4"
+      )
+      .to(
+        "#hero-badge",
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" },
+        "-=0.3"
+      )
+      .to("#hero-bottom", { opacity: 1, y: 0, duration: 0.5 }, "-=0.2");
 
-    gsap.to(".hero-char1", {
-      y: 0,
-      duration: 1,
-      delay: 0.3,
-      stagger: 0.01,
-    });
-
-    gsap.to("#target-4", {
-      opacity: 1,
-      y: "+=40",
-      duration: 0.3,
-      stagger: 0.1,
-      delay: 0.5,
-    });
+    // --- marquee ---
+    if (marqueeRef.current) {
+      gsap.to(marqueeRef.current, {
+        x: "-50%",
+        duration: 18,
+        ease: "none",
+        repeat: -1,
+      });
+    }
   }, []);
 
   return (
     <div className="text-white">
-      <div className="px-5 md:py-14 sm:px-8 md:px-12">
-        <div className="text-right pt-10 sm:p-0">
-          <div>
-            <h3 className="md:hidden oswald-font text-[#a19b98] text-left my-1">
-              Emmanuel ofoneta - Fullstack developer
-            </h3>
-            <h1 className="text-left text-xl sm:text-2xl oswald-font md:hidden">
-              I craft web apps, build secure severs, and design interface
-            </h1>
-            <h1
-              className="hidden md:block oswald-font uppercase text-2xl md:text-3xl lg:text-5xl"
-              id="target-1"
-            >
-              I craft web apps, build secure severs,
-            </h1>
-          </div>
-          <div className="hidden md:flex flex-row justify-between items-center">
-            <p className="text-sm font-bold sm:w-[400px] text-left items-center p-5">
-              With years of experience in web development, I have built projects
-              that address real-world digital challenges. Welcome to my world
-            </p>
-            <p
-              className="oswald-font uppercase bg-[#fff] sm:px-2 sm:py-4 text-[#000] text-lg sm:text-xl md:text-2xl lg:text-5xl font-semibold"
-              id="target-3"
-            >
-              and design interface
-            </p>
-          </div>
-          <div className="overflow-hidden">
-            <p
-              className="hidden md:block quicksand-font text-lg sm:text-xl md:text-2xl"
-              id="target-4"
-            >
-              Software Developer
-            </p>
+      <div className="px-5 md:py-10 sm:px-8 md:px-12">
+
+        {/* ── MOBILE HERO ── */}
+        <div className="md:hidden pt-10">
+          <p className="oswald-light text-[#a19b98] text-sm tracking-widest uppercase mb-3">
+            Emmanuel Ofoneta — Backend Engineer
+          </p>
+          <h1 className="oswald-font uppercase text-2xl sm:text-3xl leading-tight">
+            I build the systems that power products. APIs, integrations & microservices
+          </h1>
+
+          {/* mobile avatar row */}
+          <div className="mt-6 flex gap-3 items-center">
+            <img
+              src="/me-1.png"
+              alt="Emmanuel Ofoneta"
+              className="w-16 h-16 object-cover object-top rounded-full transition-all duration-700 hover:grayscale border border-[#7a1c2e60]"
+            />
+            <div>
+              <p className="text-xs text-[#a19b98]">Lagos, Nigeria</p>
+              <p className="text-xs text-[#a19b98] mt-0.5">
+                Available for work
+                <span className="inline-block w-2 h-2 rounded-full bg-green-400 ml-1.5 align-middle animate-pulse" />
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-row justify-between items-center mt-20 md:mt-[7rem]">
-          <div className="italic md:text-base text-sm font-semibold sm:w[20%] opacity-60">
-            Software developer based in Lagos, Nigeria.
+        {/* ── DESKTOP HERO ── */}
+        <div className="hidden md:block pt-0">
+
+          {/* Two headline lines left, photo right */}
+          <div className="flex items-center gap-8">
+
+            {/* LEFT: stacked headlines */}
+            <div className="flex-1 min-w-0">
+              {/* LINE 1 */}
+              <h1
+                className="oswald-font uppercase hero-headline leading-[1.05]"
+                id="target-1"
+              >
+                I build systems that power products,
+              </h1>
+
+              {/* LINE 2: inverted bar flush below line 1 */}
+              <p
+                className="oswald-font uppercase bg-[#7a1c2e] px-3 py-1 text-white hero-headline leading-[1.05] font-bold block w-fit mt-4"
+                id="target-3"
+              >
+                AI integrations & microservices
+              </p>
+
+              {/* description + role sit below both lines */}
+              <p className="text-sm text-[#a19b98] max-w-[420px] leading-relaxed mt-4">
+                Product engineer focused on third-party API integration, AI
+                tooling, and maintaining scalable microservice architectures
+                that keep businesses running smoothly.{" "}
+                <span className="text-white font-semibold">
+                  Welcome to my world.
+                </span>
+              </p>
+
+              <div className="overflow-hidden mt-3">
+                <p
+                  className="quicksand-font text-lg lg:text-xl text-[#dcd2cd]"
+                  id="target-4"
+                >
+                  Product Engineer
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT: photo */}
+            <div className="relative shrink-0 w-[220px] lg:w-[280px]">
+              <FramedImage
+                id="hero-img-inner"
+                src="/me-1.png"
+                alt="Portrait"
+                height="340px"
+                objectPosition="top"
+                hoverGreyscale={true}
+              />
+              {/* badge below image */}
+              <div
+                id="hero-badge"
+                className="mt-2 inline-block bg-[#7a1c2e] text-white px-3 py-2 text-xs font-bold oswald-font uppercase tracking-wide"
+              >
+                Based in Lagos, NG
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── BOTTOM BAR ── */}
+        <div
+          id="hero-bottom"
+          className="flex flex-row justify-between items-center mt-12 md:mt-16"
+        >
+          <div className="italic md:text-base text-sm font-semibold opacity-60">
+            Open to fulltime & freelance opportunities.
           </div>
           <a href="#contact">
-            <button className="sm:px-4 lg:px-0 hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-[#fff] text-[#000] sm:w-full md:w-full lg:w-[250px] py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#979492] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+            <button className="hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-white text-black lg:w-[250px] px-5 py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#7a1c2e] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
               <IoIosMail size={20} />
               <span>Send a message</span>
             </button>
           </a>
         </div>
+
+        {/* ── MARQUEE STRIP ── */}
+        <div className="mt-12 md:mt-16 overflow-hidden border-t border-b border-[#ffffff15] py-3 select-none">
+          <div ref={marqueeRef} className="flex gap-10 w-max">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <span
+                key={i}
+                className="oswald-light uppercase text-sm tracking-widest text-[#a19b98] whitespace-nowrap"
+              >
+                {item}
+                <span className="ml-10 text-[#ffffff20]">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
