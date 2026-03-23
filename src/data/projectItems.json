@@ -45,7 +45,13 @@
     "imageUrl": "",
     "videoUrl": "/veridianglow-video",
     "hasVideo": true,
-    "techStacks": ["Typescript", "Express", "React Js", "MongoDb", "Docker"],
+    "techStacks": [
+      "Typescript",
+      "Express",
+      "React Js",
+      "MongoDb",
+      "Docker"
+    ],
     "projectType": "Fullstack Application",
     "color": "#943971",
     "githubProject": "",
@@ -70,27 +76,47 @@
   },
   {
     "id": "03",
-    "applicationName": "Quorix Ai",
-    "imageUrl": "quorix-ai.png",
+    "applicationName": "Jota",
+    "imageUrl": "/jota-image.png",
     "videoUrl": "",
     "hasVideo": false,
-    "techStacks": ["Typescript", "Next.js", "DeepSeek", "PostgreSql"],
+    "techStacks": [
+      "Go",
+      "Fiber",
+      "PostgreSQL",
+      "GORM",
+      "JWT",
+      "WebSockets",
+      "Typescript",
+      "React",
+      "Zustand",
+      "TailwindCSS"
+    ],
     "projectType": "Fullstack Application",
-    "color": "#120A2D",
-    "githubProject": "https://github.com/eofoneta/Talewhirl-bsn",
+    "color": "#0f172a",
+    "githubProject": "",
     "isPrivateRepo": true,
-    "overview": "Quorix AI is an AI-powered tool that humanizes text, essays, cover letters, and more. It helps make responses from ChatGPT and other LLM models sound more natural and human-like.",
+    "overview": "Jota is a personal accountability dashboard built for freelancers and independent professionals. It provides an honest record of how you spend your working hours — with time tracking, project and client management, notes, tasks, and analytics all in one place.",
     "development": {
-      "docs": "This project didn’t take too long. I’ve been using Next.js for a few years, but I had never fully explored its full-stack capabilities. I decided to try out its API features, and overall, I’d say they’re solid. The best part is being able to build the entire application using a single stack—that’s what I find most exciting. For authentication, I used Clerk, and Postgres was used as the database.",
+      "docs": "Jota is a fullstack application with a Go backend built on the Fiber framework and a React frontend. The server follows a clean handler/service/model separation — GORM handles all database interaction with PostgreSQL, and models are auto-migrated on startup. The backend exposes a versioned REST API covering time entries, projects, clients, notes, tasks, and notifications. A background goroutine purges expired refresh tokens daily, and a cron scheduler runs deadline and long-timer checks on boot and on set intervals, ensuring no events are missed after a server restart.",
       "image": ""
     },
     "interactions": {
-      "docs": "I chose a minimal design for the user interaction, inspired heavily by ChatGPT's Ui, which is already mainstream and widely recognized. When you load the website, the chat interface is immediately available and ready for your prompt, along with a few suggested options to guide the user.",
+      "docs": "The backend drives most of the interactivity. A cron scheduler checks task and project deadlines every morning at 08:00 and monitors active timers every 30 minutes, pushing real-time alerts to the client over WebSocket using a per-user broadcast system. Notifications are upserted by a composite (user_id, source_key) key so duplicate alerts never accumulate. On the frontend, those pushes land instantly via a persistent WebSocket connection that updates the notification bell without any polling.",
+      "image": ""
+    },
+    "complexities": {
+      "docs": "The most complex piece of the backend was the scheduler and WebSocket notification pipeline. Each job needed to correctly upsert notifications on conflict rather than insert duplicates, resolve stale alerts when a deadline passed or a timer stopped, and broadcast the saved record to the right user over WebSocket — all reliably across server restarts. The long-timer job was especially tricky: it had to join time entries against each user's configured work-hours schedule, compute the elapsed threshold dynamically, and skip entries still within range. Getting the raw SQL joins, the ON CONFLICT upsert logic, and the stale-notification cleanup working together correctly took several iterations.",
       "image": ""
     },
     "security": {
-      "docs": "Clerk Auth was used for authentication. I wanted to try something different from a custom auth system, and Clerk did a great job handling it. The website is currently free to use, but that also opens the door to potential abuse or unnecessary server load. To manage this, I added a rate limiter that tracks how many prompts a user submits and restricts usage after a certain limit is reached for a set period of time. A payment method will be added soon, but for now, the project is still under active development.",
+      "docs": "Authentication is JWT-based with a two-token strategy. Short-lived access tokens are issued as HTTP-only cookies, and a separate refresh token is persisted in the database with an expiry timestamp. The JWT middleware on every protected Fiber route reads the cookie, validates the token against a shared secret, and attaches the user claims to the request context. When a token expires, the client hits a refresh endpoint which validates the stored refresh token, issues a new access token, and rotates the refresh token. Expired tokens are purged daily by a background goroutine on the server. CORS is locked to the frontend origin with credentials enabled, and all routes are gated by role claims extracted from the JWT payload.",
       "image": ""
-    }
+    },
+    "learning": {
+      "docs": "This project taught me a lot about designing a stateful backend in Go. Writing the scheduler pushed me to think carefully about idempotency — jobs needed to be safe to re-run on every server restart without creating noise, which led me to upsert-on-conflict patterns in raw SQL rather than relying on GORM's default save behaviour. I also learned a lot about managing WebSocket connections at the server level: maintaining a per-user connection registry, broadcasting typed payloads, and safely cleaning up connections on disconnect without race conditions. The refresh token rotation flow deepened my understanding of secure session management — particularly how to keep tokens out of JavaScript while still supporting silent renewal through a dedicated server-side endpoint.",
+      "image": ""
+    },
+    "link": "https://jota-liart.vercel.app/"
   }
 ]
