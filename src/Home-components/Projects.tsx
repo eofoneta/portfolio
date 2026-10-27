@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import { ProjectsDescriptionProps } from "../App";
+import { getProjectMeta, projectCategories } from "../data/projects";
 
 type Projectsprops = {
   projects: ProjectsDescriptionProps[];
@@ -13,6 +14,18 @@ type Projectsprops = {
 gsap.registerPlugin(ScrollTrigger);
 const Projects = ({ projects }: Projectsprops) => {
   const triggerRef = useRef(null);
+
+  const groups = projectCategories
+    .map((category) => ({
+      category,
+      items: projects.filter((p) => getProjectMeta(p).category === category),
+    }))
+    .filter((group) => group.items.length > 0);
+
+  // running offset so card numbering continues across groups
+  const groupOffsets = groups.map((_, i) =>
+    groups.slice(0, i).reduce((sum, g) => sum + g.items.length, 0)
+  );
 
   useGSAP(() => {
     new SplitType("#text", {
@@ -72,11 +85,26 @@ const Projects = ({ projects }: Projectsprops) => {
           {projects.length} projects
         </p>
       </div>
-      <div>
-        {projects?.map((result, i) => (
-          <div key={result.id} className="project-card">
-            <Card projects={result} index={i} />
-          </div>
+      <div className="flex flex-col gap-12">
+        {groups.map(({ category, items }, groupIndex) => (
+          <section key={category} aria-labelledby={`works-${category}`}>
+            <div className="px-5 pb-3 flex items-baseline justify-between border-b border-[#ffffff08]">
+              <h2
+                id={`works-${category}`}
+                className="oswald-light uppercase text-xs tracking-widest text-[#c9566a]"
+              >
+                {category} Work
+              </h2>
+              <span className="oswald-light text-xs text-[#a19b98] tabular-nums">
+                {String(items.length).padStart(2, "0")}
+              </span>
+            </div>
+            {items.map((result, i) => (
+              <div key={result.id} className="project-card">
+                <Card projects={result} index={groupOffsets[groupIndex] + i} />
+              </div>
+            ))}
+          </section>
         ))}
       </div>
     </div>

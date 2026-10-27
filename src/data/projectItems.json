@@ -1,122 +1,181 @@
 [
   {
     "id": "01",
-    "applicationName": "TaleWhirl",
-    "imageUrl": "/talewhirl-image.png",
+    "applicationName": "Speaker Discovery Platform",
+    "imageUrl": "",
     "videoUrl": "",
     "hasVideo": false,
-    "techStacks": [
-      "SpringBoot",
-      "Docker",
-      "PostgreSql",
-      "Render",
-      "Yaml",
-      "Spring Security"
-    ],
-    "projectType": "Backend Server",
-    "color": "#252525",
-    "githubProject": "https://github.com/eofoneta/Talewhirl-bsn",
-    "isPrivateRepo": false,
-    "overview": "Talewhirl is an open-source API that powers an interactive book social platform. It provides everything you need to build an online community for book lovers, from writing and sharing books to user interaction.",
+    "techStacks": ["Node.js", "ClickHouse", "MySQL", "Sequelize", "TypeScript"],
+    "projectType": "Professional Work · TorahAnytime",
+    "color": "#191e29",
+    "githubProject": "",
+    "isPrivateRepo": true,
+    "overview": "A backend-powered speaker discovery and content management platform for TorahAnytime. The system brings together lecture discovery, speaker profiles, featured content, and administrative publishing workflows using ClickHouse and MySQL.",
     "development": {
-      "docs": "The development of this project took about a month and a few days to complete. Initially, I was skeptical about whether to use Express or Spring Boot for the Server. I finally came to the conclusion to use Spring Boot, a Java framework primarily designed for building complex, enterprise level software solutions. Although it presented several constraints during development, the final results were well worth the effort. For data storage, I used PostgreSQL, while Docker's powerful containerization capabilities proved useful throughout the process.",
+      "docs": "I worked on the backend architecture supporting speaker discovery and content management. ClickHouse powers lecture queries, while MySQL manages application content and administrative data. The implementation involved faceted filtering, SQL window functions, dictionaries, and query optimization to support efficient content retrieval. I also worked on speaker banners, featured content, ownership validation, and administrative controls.",
       "image": ""
     },
     "interactions": {
-      "docs": "To create a seamless and interactive user experience on Talewhirl, several features were introduced. Users can follow their favorite authors to stay updated on their latest works, creating a personalized and engaging experience. Beyond this, users can actively participate by providing feedback on books they’ve read and rating them on a scale of 1 to 5 stars. These features not only enhance user interaction but also foster a sense of community and involvement, making the platform more dynamic and enjoyable.",
+      "docs": "Users can discover lectures through speaker pages and filtering options. Administrators can manage featured content, speaker banners, and publishing settings. The backend connects these workflows while enforcing rules around which content can appear on different pages.",
       "image": ""
     },
     "complexities": {
-      "docs": "During the development of this application, I faced several roadblocks that slowed down progress. One major challenge was resolving bugs related to query search functionality in the database, which required meticulous debugging. Another significant issue was an ambiguous constructor resolver exception on the server, which took considerable time and effort to address. Additionally, the machine I was using encountered technical difficulties, further delaying development. It was running on a hard drive that was missing essential files required for smooth operation. Resolving this issue and restoring the machine to a functional state consumed more time than anticipated. Despite these setbacks, I managed to overcome these hurdles and push forward with the development process.",
+      "docs": "One important challenge was balancing flexible content discovery with efficient database access. I addressed inefficient query patterns, including N+1 queries, through batching and query restructuring. Another challenge involved maintaining consistent ownership and visibility rules across different content placements.",
       "image": ""
     },
     "security": {
-      "docs": "To ensure the application is secure and protected from vulnerabilities, a simple yet effective approach was implemented. During the signup process, users are required to provide their email, password, and other relevant details. A six-digit token is automatically generated and sent to the email provided. If the user enters the correct token, the account gets activated and they're allowed to interact with the application. Additionally, the system archives an auto-generated username on the server, assigning each user a unique identifier during signup. This ensures better security and user management. In the future, more security features will be introduced, such as allowing users to log in using their auto-generated usernames. Plans are also underway to integrate Google authentication to enhance account security further.",
-      "image": ""
-    },
-    "learning": {
-      "docs": "Building this project taught me many new things. One of the biggest was learning how to create complex search queries that give smooth and accurate results for users. The challenges I faced during development and production helped me understand how to deal with similar problems better in the future, and I’m grateful for finding solutions to them. I also learned the importance of error handling. It’s crucial to track issues that disrupt the program flow so you can figure out where problems come from and fix them quickly. These lessons will definitely come in handy to prevent them in future applications.",
+      "docs": "Administrative operations require appropriate access controls. I implemented validation to ensure content and banner assignments respect their intended ownership and placement rules, reducing the risk of content appearing in unintended locations.",
       "image": ""
     }
   },
   {
     "id": "02",
-    "applicationName": "VeridianGlow",
+    "applicationName": "High-Performance Data Migration",
     "imageUrl": "",
-    "videoUrl": "/veridianglow-video",
-    "hasVideo": true,
-    "techStacks": [
-      "Typescript",
-      "Express",
-      "React Js",
-      "MongoDb",
-      "Docker"
-    ],
-    "projectType": "Fullstack Application",
-    "color": "#943971",
+    "videoUrl": "",
+    "hasVideo": false,
+    "techStacks": ["Go", "RethinkDB", "MySQL", "Node.js", "Docker"],
+    "projectType": "Professional Work · TorahAnytime",
+    "color": "#1b2430",
     "githubProject": "",
     "isPrivateRepo": true,
-    "overview": "VeridianGlow is a modern e-commerce store specializing in a wide range of cosmetics and skincare products. Designed with user experience in mind, it features intuitive navigation, customer product ratings, and all the essential tools you'd expect from a contemporary online shopping platform.",
+    "overview": "A high-performance data export and migration initiative supporting TorahAnytime's transition from RethinkDB to MySQL. A Go-based exporter processed approximately six million records in twelve minutes, compared with an earlier Node.js approach that processed roughly 300,000 records in sixteen hours.",
     "development": {
-      "docs": "This project took about three months to build. I handled everything myself—from the UI design and user experience to the frontend and backend. The backend was built with TypeScript, using Express for the Node.js setup because it had a lot of built-in features that made it easier to manage a complex app on my own. Redis was used for caching, which helped speed up the server and cut down hosting costs by around 60%. For the frontend, I used React.js along with Zustand for state management and TanStack React Query for its strong caching features, improving overall performance by about 10%.",
+      "docs": "As part of the database migration effort, I developed a Go-based data exporter to handle large volumes of existing records. The work focused on improving throughput and reducing the time required to extract data from the legacy system. I also contributed to migrating application data and persistence logic from RethinkDB to MySQL.",
       "image": ""
     },
     "interactions": {
-      "docs": "You might wonder why a video was used as the poster. When you visit the website, it opens with a video landing page. Before that, I asked myself, How can I make this landing page stand out? I didn’t want to build something basic. That’s when I came up with the idea of adding video to the landing page. Most e-commerce sites displays big posters or bulletins on their homepages and honestly, it’s a bit boring. The ones with beautiful video posters are usually high-end or luxury brands, and I wanted to bring that same kind of polish to this project. So, I compiled a few clips and created a quick 10-second video. I pitched the idea, and the client loved it. The final landing page loads fast in under two seconds.",
+      "docs": "This was primarily a backend infrastructure project rather than a user-facing feature. Its purpose was to make large-scale data movement more practical and support the application's transition to its newer persistence architecture.",
       "image": ""
     },
     "complexities": {
-      "docs": "One of the biggest challenges I faced during development was integrating the payment system. I used Paystack as the payment provider, but their developer documentation was limited and difficult to work with, which made the process frustrating. To solve this, I did extensive research, digging through developer blogs and community posts from others who had previously worked with the platform. Eventually, I was able to overcome the issue and complete a smooth, reliable integration.",
+      "docs": "The central challenge was the performance of the original export approach. An earlier Node.js implementation processed approximately 300,000 records over sixteen hours. The Go exporter processed approximately six million records in twelve minutes, substantially improving export throughput.",
       "image": ""
     },
     "security": {
-      "docs": "For an e-commerce website, security is crucial. Only authenticated users are allowed to place orders, this helps protect the service and ensures orders can be tracked effectively. The authentication system is simple: you provide your full name, email, and password to sign up. If you already have an account, you can log in and place an order. However, unauthenticated users can still browse and navigate the website. Admins, on the other hand, are required to go through two-factor authentication (2FA) to secure the admin endpoints from unauthorized access.",
+      "docs": "The migration work operated on application data and required careful handling of database access and record integrity. The implementation focused on controlled data extraction and reliable transfer between persistence systems.",
       "image": ""
     }
   },
   {
     "id": "03",
-    "applicationName": "Jota",
-    "imageUrl": "/jota-image.png",
+    "applicationName": "Bulk Data Import System",
+    "imageUrl": "",
     "videoUrl": "",
     "hasVideo": false,
-    "techStacks": [
-      "Go",
-      "Fiber",
-      "PostgreSQL",
-      "GORM",
-      "JWT",
-      "WebSockets",
-      "Typescript",
-      "React",
-      "Zustand",
-      "TailwindCSS"
-    ],
-    "projectType": "Fullstack Application",
-    "color": "#0f172a",
+    "techStacks": ["Go", "SQLite", "SQLBoiler", "CSV", "JavaScript"],
+    "projectType": "Professional Work · MyCelebrant",
+    "color": "#24201f",
     "githubProject": "",
     "isPrivateRepo": true,
-    "overview": "Jota is a personal accountability dashboard built for freelancers and independent professionals. It provides an honest record of how you spend your working hours — with time tracking, project and client management, notes, tasks, and analytics all in one place.",
+    "overview": "A CSV import workflow for MyCelebrant that helps celebrants bring existing leads and ceremony records into the platform, with automatic field recognition, duplicate detection, flexible date parsing, and actionable validation feedback.",
     "development": {
-      "docs": "Jota is a fullstack application with a Go backend built on the Fiber framework and a React frontend. The server follows a clean handler/service/model separation — GORM handles all database interaction with PostgreSQL, and models are auto-migrated on startup. The backend exposes a versioned REST API covering time entries, projects, clients, notes, tasks, and notifications. A background goroutine purges expired refresh tokens daily, and a cron scheduler runs deadline and long-timer checks on boot and on set intervals, ensuring no events are missed after a server restart.",
+      "docs": "I developed a bulk import workflow supporting leads and ceremonies. The implementation recognizes incoming CSV fields, handles different date formats, validates records, checks for duplicates, and creates valid application records through transactional database operations.",
       "image": ""
     },
     "interactions": {
-      "docs": "The backend drives most of the interactivity. A cron scheduler checks task and project deadlines every morning at 08:00 and monitors active timers every 30 minutes, pushing real-time alerts to the client over WebSocket using a per-user broadcast system. Notifications are upserted by a composite (user_id, source_key) key so duplicate alerts never accumulate. On the frontend, those pushes land instantly via a persistent WebSocket connection that updates the notification bell without any polling.",
+      "docs": "The workflow reduces the manual effort required to move existing records into MyCelebrant. Users can provide their data in CSV format and receive row-level feedback about validation issues, making it easier to identify and correct problematic entries.",
       "image": ""
     },
     "complexities": {
-      "docs": "The most complex piece of the backend was the scheduler and WebSocket notification pipeline. Each job needed to correctly upsert notifications on conflict rather than insert duplicates, resolve stale alerts when a deadline passed or a timer stopped, and broadcast the saved record to the right user over WebSocket — all reliably across server restarts. The long-timer job was especially tricky: it had to join time entries against each user's configured work-hours schedule, compute the elapsed threshold dynamically, and skip entries still within range. Getting the raw SQL joins, the ON CONFLICT upsert logic, and the stale-notification cleanup working together correctly took several iterations.",
+      "docs": "Real-world CSV files are rarely consistent. Handling differences in column names, date representations, missing values, and duplicate records required a flexible parsing and validation approach. Transactional creation also helped maintain consistency when records depended on related database entities.",
       "image": ""
     },
     "security": {
-      "docs": "Authentication is JWT-based with a two-token strategy. Short-lived access tokens are issued as HTTP-only cookies, and a separate refresh token is persisted in the database with an expiry timestamp. The JWT middleware on every protected Fiber route reads the cookie, validates the token against a shared secret, and attaches the user claims to the request context. When a token expires, the client hits a refresh endpoint which validates the stored refresh token, issues a new access token, and rotates the refresh token. Expired tokens are purged daily by a background goroutine on the server. CORS is locked to the frontend origin with credentials enabled, and all routes are gated by role claims extracted from the JWT payload.",
+      "docs": "The import process validates incoming data before creating records and operates within the application's existing access controls. Duplicate detection and transactional database operations help prevent inconsistent or unintended records.",
+      "image": ""
+    }
+  },
+  {
+    "id": "04",
+    "applicationName": "Embeddable Lead Capture Platform",
+    "imageUrl": "",
+    "videoUrl": "",
+    "hasVideo": false,
+    "techStacks": ["Go", "JavaScript", "SQLite", "REST API", "HTML"],
+    "projectType": "Professional Work · MyCelebrant",
+    "color": "#202622",
+    "githubProject": "",
+    "isPrivateRepo": true,
+    "overview": "An embeddable lead capture system that allows celebrants to collect enquiries through forms on their own websites and automatically bring those enquiries into MyCelebrant's management workflows.",
+    "development": {
+      "docs": "I worked on the backend and integration flow for embeddable lead capture forms. The system supports forms embedded on external websites, validates incoming submissions, checks subscription eligibility, and creates the corresponding records within the correct celebrant account. The workflow also connects submissions to invitations and notifications.",
+      "image": ""
+    },
+    "interactions": {
+      "docs": "Visitors can submit enquiries directly from a celebrant's website without navigating to MyCelebrant. Submitted information enters the celebrant's existing lead management workflow, reducing manual data entry and keeping enquiries organized.",
+      "image": ""
+    },
+    "complexities": {
+      "docs": "The main engineering challenge was supporting submissions originating from external websites while preserving account boundaries. The workflow also needed to coordinate validation, record creation, subscription checks, and downstream actions reliably.",
+      "image": ""
+    },
+    "security": {
+      "docs": "The backend uses tenant-scoped validation to associate submissions with the correct account. Subscription enforcement, rate limiting, and transactional creation help protect the public-facing integration and maintain data consistency.",
+      "image": ""
+    }
+  },
+  {
+    "id": "05",
+    "applicationName": "AI-Powered Incident Management",
+    "imageUrl": "",
+    "videoUrl": "",
+    "hasVideo": false,
+    "techStacks": ["TypeScript", "Node.js", "Prisma", "PostgreSQL", "OpenAI"],
+    "projectType": "Professional Work · Scrubbe",
+    "color": "#221e2c",
+    "githubProject": "",
+    "isPrivateRepo": true,
+    "overview": "Backend development for Scrubbe, a security and operations platform featuring incident management, service-level tracking, integrations, and an AI assistant called Ezra that helps users explore operational information.",
+    "development": {
+      "docs": "I worked on TypeScript and Node.js backend services using Prisma and PostgreSQL. My contributions included incident-related functionality and the AI assistant Ezra, which interprets natural-language requests into structured parameters such as timeframes, priorities, and search terms.",
+      "image": ""
+    },
+    "interactions": {
+      "docs": "Ezra helps users request incident summaries and explore operational information through natural language. The assistant interprets prompts and supports streaming responses, allowing users to receive generated summaries progressively.",
+      "image": ""
+    },
+    "complexities": {
+      "docs": "One challenge was converting flexible natural-language requests into predictable parameters that backend services could use. This included extracting relevant timeframes, priorities, and search terms while supporting sensible defaults when users did not specify every detail.",
+      "image": ""
+    },
+    "security": {
+      "docs": "The application handles operational incident information through backend services. The implementation used the application's existing data access and authentication architecture rather than exposing unrestricted database access through the AI assistant.",
+      "image": ""
+    }
+  },
+  {
+    "id": "06",
+    "applicationName": "Jottaware",
+    "imageUrl": "/jota-image.png",
+    "videoUrl": "",
+    "hasVideo": false,
+    "techStacks": ["Go", "Fiber", "PostgreSQL", "GORM", "WebSockets", "React", "TypeScript"],
+    "projectType": "Personal Work · SaaS Platform",
+    "color": "#0f172a",
+    "githubProject": "",
+    "isPrivateRepo": true,
+    "link": "https://www.jottaware.com",
+    "overview": "Jottaware is a multi-tenant work management SaaS for freelancers and small teams. It brings organizations, clients, projects, tasks, time tracking, notes, reporting, and real-time communication into one workspace.",
+    "development": {
+      "docs": "I built Jottaware with a Go backend using Fiber, PostgreSQL, and GORM, alongside a React and TypeScript frontend. The backend provides APIs for organizations, clients, projects, tasks, time entries, notes, notifications, and workspace management. The platform also includes background jobs, reporting, file handling, and invitation workflows.",
+      "image": ""
+    },
+    "interactions": {
+      "docs": "Jottaware supports collaboration through workspace invitations, client-facing workflows, and real-time communication using WebSockets. Users can organize their work, track time, manage project progress, and receive notifications without constantly refreshing the application.",
+      "image": ""
+    },
+    "complexities": {
+      "docs": "Building a multi-tenant SaaS required careful attention to data ownership, organization boundaries, and user permissions. Another challenge was coordinating real-time communication, scheduled notifications, and time tracking while maintaining consistent application state.",
+      "image": ""
+    },
+    "security": {
+      "docs": "The backend uses JWT-based authentication, refresh-token handling, password hashing, and authorization checks. Organization and resource ownership rules help ensure users only access information belonging to workspaces they are permitted to use.",
       "image": ""
     },
     "learning": {
-      "docs": "This project taught me a lot about designing a stateful backend in Go. Writing the scheduler pushed me to think carefully about idempotency — jobs needed to be safe to re-run on every server restart without creating noise, which led me to upsert-on-conflict patterns in raw SQL rather than relying on GORM's default save behaviour. I also learned a lot about managing WebSocket connections at the server level: maintaining a per-user connection registry, broadcasting typed payloads, and safely cleaning up connections on disconnect without race conditions. The refresh token rotation flow deepened my understanding of secure session management — particularly how to keep tokens out of JavaScript while still supporting silent renewal through a dedicated server-side endpoint.",
+      "docs": "Building Jottaware has strengthened my understanding of multi-tenant backend architecture, authentication, real-time systems, background processing, and SaaS product development. It has also given me experience making technical decisions across the entire product, from database design to deployment.",
       "image": ""
-    },
-    "link": "https://jota-liart.vercel.app/"
+    }
   }
 ]

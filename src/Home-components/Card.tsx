@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { ProjectsDescriptionProps } from "../App";
-import VideoBanner from "../Components/VideoBanner";
+import ProjectCover from "../Components/ProjectCover";
+import { getProjectMeta } from "../data/projects";
 
 export type CardProps = {
   projects: ProjectsDescriptionProps;
@@ -9,6 +10,8 @@ export type CardProps = {
 };
 
 const Card = ({ projects, index }: CardProps) => {
+  const { organization } = getProjectMeta(projects);
+
   return (
     <Link
       to={`/project/${projects.id}`}
@@ -26,33 +29,32 @@ const Card = ({ projects, index }: CardProps) => {
       <div className="sm:w-[240px] lg:w-[300px] shrink-0 overflow-hidden relative">
         {/* wine glow */}
         <div className="absolute -inset-2 bg-[#7a1c2e] blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
-        {projects.hasVideo ? (
-          <VideoBanner
-            videoPath={projects.videoUrl}
-            className="w-full aspect-video object-cover border border-[#ffffff08] group-hover:border-[#7a1c2e50] transition-all duration-300"
-          />
-        ) : (
-          <img
-            src={projects.imageUrl}
-            alt={projects.applicationName}
-            className="w-full aspect-video object-cover border border-[#ffffff08] group-hover:border-[#7a1c2e50] transition-all duration-300"
-            style={{ backgroundColor: projects.color }}
-          />
-        )}
+        <ProjectCover
+          project={projects}
+          className="w-full aspect-video object-cover border border-[#ffffff08] group-hover:border-[#7a1c2e50] transition-all duration-300"
+        />
       </div>
 
       {/* ── CONTENT ── */}
       <div className="flex flex-col justify-between flex-1 min-w-0 gap-4">
         <div>
-          {/* type label */}
-          <p className="oswald-light uppercase text-[10px] tracking-widest text-[#7a1c2e] mb-2">
-            {projects.projectType}
-          </p>
+          {/* organization / type label */}
+          <div className="flex items-center gap-2 mb-2">
+            <p className="oswald-light uppercase text-[10px] tracking-widest text-[#7a1c2e]">
+              {organization}
+            </p>
+            {projects.link && (
+              <span className="flex items-center gap-1 oswald-light uppercase text-[9px] tracking-widest text-[#a19b98]">
+                <span className="w-1 h-1 rounded-full bg-[#c9566a]" />
+                Live
+              </span>
+            )}
+          </div>
 
           {/* title */}
-          <h2 className="oswald-font uppercase text-2xl lg:text-3xl group-hover:text-white transition-colors duration-300 leading-tight">
+          <h3 className="oswald-font uppercase text-2xl lg:text-3xl group-hover:text-white transition-colors duration-300 leading-tight">
             {projects.applicationName}
-          </h2>
+          </h3>
 
           {/* overview — truncated */}
           <p className="quicksand-text text-sm text-[#a19b98] mt-2 leading-relaxed line-clamp-2 group-hover:text-[#dcd2cd] transition-colors duration-300">

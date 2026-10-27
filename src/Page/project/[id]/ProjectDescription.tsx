@@ -1,12 +1,11 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import ProjectItems from "../../../data/projectItems.json";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { ProjectsDescriptionProps } from "../../../App";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaLock } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import VideoBanner from "../../../Components/VideoBanner";
+import ProjectCover from "../../../Components/ProjectCover";
+import { getProjectMeta, projects } from "../../../data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,15 +14,17 @@ const Section = ({
   index,
   label,
   heading,
+  image,
   children,
 }: {
   id: string;
   index: string;
   label: string;
   heading: string;
+  image?: string;
   children: React.ReactNode;
 }) => (
-  <div id={id} className="section-block pt-16 border-t border-[#ffffff08]">
+  <div id={id} className="section-block pt-16 border-t border-[#ffffff08] scroll-mt-20">
     <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] mb-1">
       {index} — {label}
     </p>
@@ -33,6 +34,14 @@ const Section = ({
     <div className="quicksand-text text-sm text-[#a19b98] leading-relaxed">
       {children}
     </div>
+    {image && (
+      <img
+        src={image}
+        alt={heading}
+        loading="lazy"
+        className="w-full mt-8 border border-[#ffffff08]"
+      />
+    )}
   </div>
 );
 
@@ -40,15 +49,13 @@ const ProjectDescription = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const currentIndex = ProjectItems.findIndex((project) => project.id === id);
-  const nextIndex = (currentIndex + 1) % ProjectItems.length;
-  const nextProject = ProjectItems[nextIndex];
-
-  const project = ProjectItems.find(
-    (project) => project.id === id
-  ) as ProjectsDescriptionProps;
+  const currentIndex = projects.findIndex((project) => project.id === id);
+  const project = projects[currentIndex];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   useGSAP(() => {
+    if (!project) return;
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ["#desc-meta", "#desc-title", "#desc-media"],
@@ -68,7 +75,50 @@ const ProjectDescription = () => {
       });
     });
     return () => ctx.revert();
-  }, []);
+  }, [id]);
+
+  if (!project) return <Navigate to="/" replace />;
+
+  const { category, organization } = getProjectMeta(project);
+  const nextMeta = getProjectMeta(nextProject);
+  const isProfessional = category === "Professional";
+  const hasPublicRepo = !project.isPrivateRepo && project.githubProject;
+
+  // overview is always 01; the rest are numbered by what the project actually has
+  const sections = [
+    {
+      id: "development",
+      label: "Development",
+      heading: isProfessional ? "What I built and contributed" : "How it was built",
+      content: project.development,
+    },
+    {
+      id: "interaction",
+      label: "Interactions",
+      heading: "How it serves users and workflows",
+      content: project.interactions,
+    },
+    {
+      id: "complexities",
+      label: "Complexities",
+      heading: "Challenges and how they were solved",
+      content: project.complexities,
+    },
+    {
+      id: "security",
+      label: "Security",
+      heading: "Safeguards, access and data integrity",
+      content: project.security,
+    },
+    {
+      id: "learnings",
+      label: "Key Learnings",
+      heading: "What building it taught me",
+      content: project.learning,
+    },
+  ]
+    .filter((section) => section.content?.docs)
+    .map((section, i) => ({ ...section, index: String(i + 2).padStart(2, "0") }));
 
   return (
     <div className="min-h-screen w-full relative">
@@ -110,13 +160,13 @@ const ProjectDescription = () => {
           {/* meta row */}
           <div id="desc-meta" className="flex items-center gap-3 mb-6 flex-wrap">
             <span className="oswald-light uppercase text-[10px] tracking-widest text-[#7a1c2e] border border-[#7a1c2e40] px-2 py-1">
-              {project.projectType}
+              {category} Work
             </span>
-            {project.techStacks.slice(0, 3).map((t, i) => (
-              <span key={i} className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] border border-[#ffffff10] px-2 py-1">
-                {t}
+            {organization && (
+              <span className="oswald-light uppercase text-[10px] tracking-widest text-[#dcd2cd]">
+                {organization}
               </span>
-            ))}
+            )}
           </div>
 
           {/* title */}
@@ -133,29 +183,28 @@ const ProjectDescription = () => {
               <Link
                 to={project.link}
                 target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 border border-[#dcd2cd40] hover:border-[#7a1c2e] hover:text-[#c9566a] transition-all duration-300"
               >
                 <span>View live</span>
                 <FaArrowRightLong size={10} className="-rotate-45" />
               </Link>
             )}
-            {!project.isPrivateRepo ? (
+            {hasPublicRepo ? (
               <Link
                 to={project.githubProject}
                 target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 bg-[#dcd2cd] text-black hover:bg-[#c9566a] hover:text-white transition-all duration-300"
               >
                 <span>Source code</span>
                 <FaGithub size={13} />
               </Link>
             ) : (
-              <button
-                disabled
-                className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 bg-[#dcd2cd20] text-[#a19b98] cursor-not-allowed"
-              >
-                <span>Private repo</span>
-                <FaGithub size={13} />
-              </button>
+              <span className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest px-4 py-2.5 bg-[#dcd2cd20] text-[#a19b98] cursor-default">
+                <span>{isProfessional ? "Proprietary codebase" : "Private repo"}</span>
+                {isProfessional ? <FaLock size={11} /> : <FaGithub size={13} />}
+              </span>
             )}
           </div>
 
@@ -165,19 +214,11 @@ const ProjectDescription = () => {
               className="absolute -inset-4 blur-3xl opacity-30 rounded-full"
               style={{ background: project.color }}
             />
-            {project.hasVideo ? (
-              <VideoBanner
-                videoPath={project.videoUrl}
-                className="relative z-10 w-full border border-[#ffffff08]"
-              />
-            ) : (
-              <img
-                src={project.imageUrl}
-                alt={project.applicationName}
-                className="relative z-10 w-full border border-[#ffffff08]"
-                style={{ background: project.color }}
-              />
-            )}
+            <ProjectCover
+              project={project}
+              size="lg"
+              className="relative z-10 w-full border border-[#ffffff08]"
+            />
           </div>
         </div>
 
@@ -191,17 +232,10 @@ const ProjectDescription = () => {
                 Contents
               </p>
               <nav className="flex flex-col gap-2.5">
-                {[
-                  { href: "#overview", label: "Overview" },
-                  { href: "#development", label: "Development" },
-                  { href: "#interaction", label: "Interactions" },
-                  ...(project.complexities ? [{ href: "#complexities", label: "Complexities" }] : []),
-                  { href: "#security", label: "Security" },
-                  ...(project.learning ? [{ href: "#learnings", label: "Learnings" }] : []),
-                ].map((item) => (
+                {[{ id: "overview", label: "Overview" }, ...sections].map((item) => (
                   <a
-                    key={item.href}
-                    href={item.href}
+                    key={item.id}
+                    href={`#${item.id}`}
                     className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] hover:text-[#c9566a] transition-colors duration-200"
                   >
                     {item.label}
@@ -215,16 +249,32 @@ const ProjectDescription = () => {
           <div className="flex-1 min-w-0 space-y-0">
 
             {/* overview + tech */}
-            <div id="overview" className="section-block pt-16 border-t border-[#ffffff08]">
+            <div id="overview" className="section-block pt-16 border-t border-[#ffffff08] scroll-mt-20">
               <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] mb-1">
                 01 — Overview
               </p>
               <h2 className="oswald-font uppercase text-xl lg:text-2xl text-white mb-6 leading-tight">
-                What is {project.applicationName}?
+                The project in brief
               </h2>
               <p className="quicksand-text text-sm text-[#a19b98] leading-relaxed mb-8">
                 {project.overview}
               </p>
+
+              {/* project facts */}
+              <dl className="grid grid-cols-2 gap-6 mb-8">
+                <div>
+                  <dt className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-1">
+                    {isProfessional ? "Organization" : "Type"}
+                  </dt>
+                  <dd className="oswald-font uppercase text-sm text-[#dcd2cd]">{organization}</dd>
+                </div>
+                <div>
+                  <dt className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-1">
+                    Context
+                  </dt>
+                  <dd className="oswald-font uppercase text-sm text-[#dcd2cd]">{category} work</dd>
+                </div>
+              </dl>
 
               {/* tech stack inline */}
               <div>
@@ -244,53 +294,32 @@ const ProjectDescription = () => {
               </div>
             </div>
 
-            <Section id="development" index="02" label="Development" heading="The building stage and process">
-              <p>{project.development.docs}</p>
-            </Section>
-
-            <Section id="interaction" index="03" label="Interactions" heading="Seamless user interactions and experiences">
-              <p>{project.interactions.docs}</p>
-            </Section>
-
-            {project.complexities && (
-              <Section id="complexities" index="04" label="Complexities" heading="Bugs, roadblocks and pile of constraints">
-                <p>{project.complexities.docs}</p>
-              </Section>
-            )}
-
-            <Section
-              id="security"
-              index={project.complexities ? "05" : "04"}
-              label="Security"
-              heading="Ensuring the application is secure from vulnerabilities"
-            >
-              <p>{project.security.docs}</p>
-            </Section>
-
-            {project.learning && (
+            {sections.map((section) => (
               <Section
-                id="learnings"
-                index={project.complexities ? "06" : "05"}
-                label="Key Learnings"
-                heading="Insights and knowledge gained from building the project"
+                key={section.id}
+                id={section.id}
+                index={section.index}
+                label={section.label}
+                heading={section.heading}
+                image={section.content?.image}
               >
-                <p>{project.learning.docs}</p>
+                <p>{section.content?.docs}</p>
               </Section>
-            )}
+            ))}
 
             {/* next project footer */}
             <div className="pt-20 border-t border-[#ffffff08] mt-16">
               <p className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mb-2">
-                Next project
+                Next project · <span className="text-[#7a1c2e]">{nextMeta.organization}</span>
               </p>
               <button
                 onClick={() => navigate(`/project/${nextProject.id}`)}
-                className="group flex items-center gap-3 oswald-font uppercase text-2xl lg:text-3xl text-white hover:text-[#c9566a] transition-colors duration-300"
+                className="group flex items-center gap-3 oswald-font uppercase text-2xl lg:text-3xl text-white hover:text-[#c9566a] transition-colors duration-300 text-left"
               >
                 {nextProject.applicationName}
                 <FaArrowRightLong
                   size={16}
-                  className="-rotate-45 group-hover:translate-x-1 transition-transform duration-300"
+                  className="-rotate-45 group-hover:translate-x-1 transition-transform duration-300 shrink-0"
                 />
               </button>
             </div>
