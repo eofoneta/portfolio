@@ -128,7 +128,7 @@ const Hero = () => {
 
               {/* description + role sit below both lines */}
               <p className="text-sm text-[#a19b98] max-w-[420px] leading-relaxed mt-4">
-                Product engineer focused on third-party API integration, AI
+                Software engineer focused on third-party API integration, AI
                 tooling, and maintaining scalable microservice architectures
                 that keep businesses running smoothly.{" "}
                 <span className="text-white font-semibold">
@@ -141,7 +141,7 @@ const Hero = () => {
                   className="quicksand-font text-lg lg:text-xl text-[#dcd2cd]"
                   id="target-4"
                 >
-                  Product Engineer
+                  Software Engineer
                 </p>
               </div>
             </div>
