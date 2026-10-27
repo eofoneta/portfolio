@@ -102,6 +102,17 @@ body {
   font-size: clamp(1.6rem, 3.6vw, 3.5rem);
 }
 
+/* hero background — faint grid in the text colour, masked to fade out toward the edges */
+.hero-grid {
+  background-image:
+    linear-gradient(rgb(var(--color-fg) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--color-fg) / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 20%, transparent 100%);
+}
+
 /* reusable image frame — ::after renders inside its own stacking context, never clipped */
 .img-frame {
   position: relative;

@@ -73,7 +73,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-strong">
+    <div className="text-strong relative isolate">
+      {/* ── BACKGROUND: blueprint grid fading out from the headline + wine glow behind the photo ── */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-24 bottom-0 -z-10 overflow-hidden">
+        <div className="hero-grid absolute inset-0" />
+        <div className="absolute top-[20%] right-[8%] w-[280px] h-[280px] md:w-[480px] md:h-[400px] rounded-full bg-[#7a1c2e] opacity-[0.18] blur-[110px]" />
+      </div>
+
       <div className="px-5 md:py-10 sm:px-8 md:px-12">
 
         {/* ── MOBILE HERO ── */}
