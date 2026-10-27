@@ -182,7 +182,7 @@ const Hero = () => {
             Open to fulltime & freelance opportunities.
           </div>
           <a href="#contact">
-            <button className="hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-strong text-surface lg:w-[250px] px-5 py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#7a1c2e] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+            <button className="hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-black text-white dark:bg-white dark:text-black lg:w-[250px] px-5 py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#7a1c2e] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
               <IoIosMail size={20} />
               <span>Send a message</span>
             </button>
