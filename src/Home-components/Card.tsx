@@ -21,7 +21,7 @@ const Card = ({ projects, index }: CardProps) => {
       <div className="absolute left-0 top-0 h-full w-[2px] bg-[#7a1c2e] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* ── INDEX ── */}
-      <span className="oswald-light text-xs text-[#a19b98] tabular-nums shrink-0 w-6 pt-1 hidden sm:block">
+      <span className="oswald-light text-xs text-muted tabular-nums shrink-0 w-6 pt-1 hidden sm:block">
         {String(index + 1).padStart(2, "0")}
       </span>
 
@@ -44,7 +44,7 @@ const Card = ({ projects, index }: CardProps) => {
               {organization}
             </p>
             {projects.link && (
-              <span className="flex items-center gap-1 oswald-light uppercase text-[9px] tracking-widest text-[#a19b98]">
+              <span className="flex items-center gap-1 oswald-light uppercase text-[9px] tracking-widest text-muted">
                 <span className="w-1 h-1 rounded-full bg-[#c9566a]" />
                 Live
               </span>
@@ -52,12 +52,12 @@ const Card = ({ projects, index }: CardProps) => {
           </div>
 
           {/* title */}
-          <h3 className="oswald-font uppercase text-2xl lg:text-3xl group-hover:text-white transition-colors duration-300 leading-tight">
+          <h3 className="oswald-font uppercase text-2xl lg:text-3xl group-hover:text-strong transition-colors duration-300 leading-tight">
             {projects.applicationName}
           </h3>
 
           {/* overview — truncated */}
-          <p className="quicksand-text text-sm text-[#a19b98] mt-2 leading-relaxed line-clamp-2 group-hover:text-[#dcd2cd] transition-colors duration-300">
+          <p className="quicksand-text text-sm text-muted mt-2 leading-relaxed line-clamp-2 group-hover:text-fg transition-colors duration-300">
             {projects.overview}
           </p>
         </div>
@@ -68,7 +68,7 @@ const Card = ({ projects, index }: CardProps) => {
             {projects.techStacks.slice(0, 3).map((tech, i) => (
               <span
                 key={i}
-                className="oswald-light text-[9px] uppercase tracking-widest px-2 py-0.5 border border-[#ffffff10] group-hover:border-[#7a1c2e50] group-hover:text-[#c9566a] text-[#a19b98] transition-all duration-300"
+                className="oswald-light text-[9px] uppercase tracking-widest px-2 py-0.5 border border-[#ffffff10] group-hover:border-[#7a1c2e50] group-hover:text-[#c9566a] text-muted transition-all duration-300"
               >
                 {tech}
               </span>
@@ -76,12 +76,12 @@ const Card = ({ projects, index }: CardProps) => {
           </div>
 
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] group-hover:text-[#c9566a] transition-colors duration-300">
+            <span className="oswald-light uppercase text-[10px] tracking-widest text-muted group-hover:text-[#c9566a] transition-colors duration-300">
               View project
             </span>
             <FaArrowRightLong
               size={10}
-              className="text-[#a19b98] group-hover:text-[#c9566a] group-hover:translate-x-0.5 -rotate-45 transition-all duration-300"
+              className="text-muted group-hover:text-[#c9566a] group-hover:translate-x-0.5 -rotate-45 transition-all duration-300"
             />
           </div>
         </div>

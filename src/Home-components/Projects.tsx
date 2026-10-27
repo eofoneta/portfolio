@@ -77,7 +77,7 @@ const Projects = ({ projects }: Projectsprops) => {
       >
         <h1
           id="text"
-          className="oswald-font text-3xl md:text-5xl lg:text-7xl text-[#ffffffe2]"
+          className="oswald-font text-3xl md:text-5xl lg:text-7xl text-strong/90"
         >
           Selected Works
         </h1>
@@ -95,7 +95,7 @@ const Projects = ({ projects }: Projectsprops) => {
               >
                 {category} Work
               </h2>
-              <span className="oswald-light text-xs text-[#a19b98] tabular-nums">
+              <span className="oswald-light text-xs text-muted tabular-nums">
                 {String(items.length).padStart(2, "0")}
               </span>
             </div>

@@ -67,16 +67,16 @@ const WorkExperience = () => {
             <div className="flex items-start justify-between gap-4 mb-3">
               <div className="flex items-start gap-4">
                 {/* index */}
-                <span className="oswald-light text-xs text-[#a19b98] tabular-nums pt-1 w-5 shrink-0">
+                <span className="oswald-light text-xs text-muted tabular-nums pt-1 w-5 shrink-0">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
                   {/* role */}
-                  <h2 className="oswald-font uppercase tracking-wide text-lg lg:text-2xl md:text-xl group-hover:text-white transition-colors duration-300 leading-tight">
+                  <h2 className="oswald-font uppercase tracking-wide text-lg lg:text-2xl md:text-xl group-hover:text-strong transition-colors duration-300 leading-tight">
                     {item.role}
                   </h2>
                   {/* company + location */}
-                  <p className="oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] mt-1.5">
+                  <p className="oswald-light uppercase text-[10px] tracking-widest text-muted mt-1.5">
                     <span className="text-[#c9566a]">{item.company}</span> · {item.location}
                   </p>
                 </div>
@@ -96,7 +96,7 @@ const WorkExperience = () => {
                 ).map((highlight, j) => (
                   <li
                     key={j}
-                    className="flex gap-3 quicksand-text text-sm text-[#a19b98] leading-relaxed group-hover:text-[#dcd2cd] transition-colors duration-300"
+                    className="flex gap-3 quicksand-text text-sm text-muted leading-relaxed group-hover:text-fg transition-colors duration-300"
                   >
                     <span className="mt-[0.6em] w-1 h-1 rounded-full bg-[#7a1c2e] shrink-0" />
                     <span>{highlight}</span>
@@ -108,7 +108,7 @@ const WorkExperience = () => {
                 <button
                   onClick={() => toggleExpanded(i)}
                   aria-expanded={expanded.has(i)}
-                  className="mt-2 oswald-light uppercase text-[10px] tracking-widest text-[#a19b98] hover:text-[#c9566a] transition-colors duration-300"
+                  className="mt-2 oswald-light uppercase text-[10px] tracking-widest text-muted hover:text-[#c9566a] transition-colors duration-300"
                 >
                   {expanded.has(i) ? "See less" : "...See more"}
                 </button>
@@ -119,7 +119,7 @@ const WorkExperience = () => {
                 {item.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="oswald-light text-[9px] uppercase tracking-widest px-2 py-0.5 border border-[#ffffff10] group-hover:border-[#7a1c2e50] text-[#a19b98] transition-all duration-300"
+                    className="oswald-light text-[9px] uppercase tracking-widest px-2 py-0.5 border border-[#ffffff10] group-hover:border-[#7a1c2e50] text-muted transition-all duration-300"
                   >
                     {tech}
                   </span>

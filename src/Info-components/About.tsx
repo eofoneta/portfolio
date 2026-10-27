@@ -104,7 +104,7 @@ const About = () => {
             <h2 className="oswald-font text-xl md:text-2xl lg:text-3xl mb-4 leading-tight">
               The person behind the code.
             </h2>
-            <p className="text-[#a19b98] leading-relaxed mb-8">
+            <p className="text-muted leading-relaxed mb-8">
               My name is Emmanuel Ofoneta, and I'm based in Lagos, Nigeria. I'm
               a software engineer with a passion for building both frontend and
               backend technologies. My journey in tech has been shaped by a love
@@ -128,7 +128,7 @@ const About = () => {
             <h2 className="oswald-font text-xl md:text-2xl lg:text-3xl mb-4 leading-tight">
               How it all started.
             </h2>
-            <p className="text-[#a19b98] leading-relaxed">
+            <p className="text-muted leading-relaxed">
               I stumbled upon coding during the lockdown, which turned out to be
               a life changing decision. At first, I began by creating simple
               frontend websites, which quickly turned into a passion — this
@@ -163,7 +163,7 @@ const About = () => {
               </p>
             </div>
 
-            <p className="text-[#a19b98] leading-relaxed">
+            <p className="text-muted leading-relaxed">
               As I grew in my development journey, I realized I wanted to
               understand more about how software truly works — especially on the
               backend. I wasn't just satisfied with creating websites; I wanted

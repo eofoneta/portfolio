@@ -58,7 +58,7 @@ const TechStacks = () => {
             <dt className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] pt-0.5">
               {group.label}
             </dt>
-            <dd className="oswald-font uppercase text-sm md:text-base tracking-wide text-[#dcd2cd] leading-relaxed">
+            <dd className="oswald-font uppercase text-sm md:text-base tracking-wide text-fg leading-relaxed">
               {group.items.join(" · ")}
             </dd>
           </div>

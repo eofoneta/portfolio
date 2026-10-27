@@ -6,16 +6,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Text and background colours — RGB channels so Tailwind opacity modifiers work.
+ * Dark is the default; light applies when the system prefers it.
+ */
+:root {
+  color-scheme: dark;
+  --color-surface: 0 0 0; /* page background */
+  --color-raised: 23 23 23; /* menus / overlays */
+  --color-fg: 220 210 205; /* body text */
+  --color-muted: 161 155 152; /* secondary text */
+  --color-strong: 255 255 255; /* headings, hover emphasis */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --color-surface: 247 243 241;
+    --color-raised: 255 255 255;
+    --color-fg: 42 35 34;
+    --color-muted: 111 103 100;
+    --color-strong: 18 14 13;
+  }
+}
+
 body {
   font-family: "Roboto", sans-serif;
   max-width: 1440px;
-  background: #000;
+  background: rgb(var(--color-surface));
   margin: auto;
 }
 
 :root {
-  color: #dcd2cd;
-  background-color: #000;
+  color: rgb(var(--color-fg));
+  background-color: rgb(var(--color-surface));
   transition: all 0.5;
   --accent: #7a1c2e;
 }

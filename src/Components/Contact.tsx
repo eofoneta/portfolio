@@ -66,7 +66,7 @@ const Contact = () => {
             <IoMail size={30} />
           </button>
           {copied && (
-            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-black text-white text-sm px-3 py-1 rounded">
+            <div className="absolute top-full left-1/2 -translate-x-1/2 bg-strong text-surface text-sm px-3 py-1 rounded">
               Copied!
             </div>
           )}

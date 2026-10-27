@@ -126,7 +126,7 @@ const NavBar = () => {
         className={
           !nav
             ? "hidden"
-            : "md:hidden fixed right-0 top-[80%] p-6 rounded-lg z-10 min-w-[40%] sm:w-[30%] transition-all bg-[#171717] border border-[#7a1c2e30]"
+            : "md:hidden fixed right-0 top-[80%] p-6 rounded-lg z-10 min-w-[40%] sm:w-[30%] transition-all bg-raised border border-[#7a1c2e30]"
         }
       >
         <ul className="flex flex-col gap-5">

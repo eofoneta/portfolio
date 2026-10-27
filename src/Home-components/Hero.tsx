@@ -73,12 +73,12 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="text-white">
+    <div className="text-strong">
       <div className="px-5 md:py-10 sm:px-8 md:px-12">
 
         {/* ── MOBILE HERO ── */}
         <div className="md:hidden pt-10">
-          <p className="oswald-light text-[#a19b98] text-sm tracking-widest uppercase mb-3">
+          <p className="oswald-light text-muted text-sm tracking-widest uppercase mb-3">
             Emmanuel Ofoneta — Backend Engineer
           </p>
           <h1 className="oswald-font uppercase text-2xl sm:text-3xl leading-tight">
@@ -93,8 +93,8 @@ const Hero = () => {
               className="w-16 h-16 object-cover object-top rounded-full transition-all duration-700 hover:grayscale border border-[#7a1c2e60]"
             />
             <div>
-              <p className="text-xs text-[#a19b98]">Lagos, Nigeria</p>
-              <p className="text-xs text-[#a19b98] mt-0.5">
+              <p className="text-xs text-muted">Lagos, Nigeria</p>
+              <p className="text-xs text-muted mt-0.5">
                 Available for work
                 <span className="inline-block w-2 h-2 rounded-full bg-green-400 ml-1.5 align-middle animate-pulse" />
               </p>
@@ -127,18 +127,18 @@ const Hero = () => {
               </p>
 
               {/* description + role sit below both lines */}
-              <p className="text-sm text-[#a19b98] max-w-[420px] leading-relaxed mt-4">
+              <p className="text-sm text-muted max-w-[420px] leading-relaxed mt-4">
                 Software engineer focused on third-party API integration, AI
                 tooling, and maintaining scalable microservice architectures
                 that keep businesses running smoothly.{" "}
-                <span className="text-white font-semibold">
+                <span className="text-strong font-semibold">
                   Welcome to my world.
                 </span>
               </p>
 
               <div className="overflow-hidden mt-3">
                 <p
-                  className="quicksand-font text-lg lg:text-xl text-[#dcd2cd]"
+                  className="quicksand-font text-lg lg:text-xl text-fg"
                   id="target-4"
                 >
                   Software Engineer
@@ -176,7 +176,7 @@ const Hero = () => {
             Open to fulltime & freelance opportunities.
           </div>
           <a href="#contact">
-            <button className="hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-white text-black lg:w-[250px] px-5 py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#7a1c2e] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
+            <button className="hidden sm:flex flex-row flex-nowrap justify-center transition-all rounded-lg font-bold items-center gap-2 bg-strong text-surface lg:w-[250px] px-5 py-2 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_#7a1c2e] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
               <IoIosMail size={20} />
               <span>Send a message</span>
             </button>
@@ -189,7 +189,7 @@ const Hero = () => {
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
               <span
                 key={i}
-                className="oswald-light uppercase text-sm tracking-widest text-[#a19b98] whitespace-nowrap"
+                className="oswald-light uppercase text-sm tracking-widest text-muted whitespace-nowrap"
               >
                 {item}
                 <span className="ml-10 text-[#ffffff20]">✦</span>
