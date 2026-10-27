@@ -1,44 +1,62 @@
 [
   {
     "role": "Full-stack Engineer",
+    "company": "TorahAnytime",
+    "location": "United States, Remote",
     "duration": "Aug 2025 – Present",
-    "info1": "Migrating a large scale Node.js application written in legacy CommonJS to modern standards and transitioned the backend from RethinkDB to MySQL, improving query performance and long-term maintainability.",
-    "info2": "Partnered with the team lead to optimize frontend performance and integrate weserv.nl for sharper, faster-loading thumbnails, reducing image load times by 40%."
+    "technologies": ["Node.js", "TypeScript", "MySQL", "ClickHouse", "tRPC", "Next.js", "Go", "Kubernetes", "Temporal"],
+    "highlights": [
+      "Engineered backend services for a speaker publishing and discovery platform, combining ClickHouse lecture queries with MySQL-backed content management, advanced filtering, and pagination.",
+      "Optimized lecture discovery using ClickHouse dictionaries, window functions, and batched queries; implemented faceted filters and eliminated N+1 requests in topic-based recommendations.",
+      "Built speaker self-service workflows for featured classes, uploads, and banner placements, enforcing resource ownership, premium entitlements, and idempotent asset replacement.",
+      "Contributed to migration of a legacy Node.js backend from RethinkDB to MySQL, improving maintainability and supporting production data workflows.",
+      "Built a Go exporter that processed 6 million records in 12 minutes, replacing a Node.js process that handled 300,000 records in 16 hours."
+    ]
   },
   {
-    "role": "Senior Backend Engineer (Contract)",
+    "role": "CRM Software Developer (Contract, Part-time)",
+    "company": "MyCelebrantApp",
+    "location": "New Zealand, Remote",
+    "duration": "Nov 2025 – Present",
+    "technologies": ["Go", "SQLite", "SQLBoiler", "TypeScript", "REST APIs"],
+    "highlights": [
+      "Engineered an end-to-end bulk CSV import workflow for leads and ceremony bookings, including automatic field recognition, resilient date parsing, duplicate detection, row-level validation, and transactional creation of records with package defaults.",
+      "Architected an embeddable enquiry form that converts website submissions into structured ceremony records, automating client invitations, notifications, and follow-up workflows.",
+      "Secured public lead-capture workflows with tenant-scoped package validation, subscription enforcement, server-side validation, and IP/form-based rate limiting.",
+      "Extended the SaaS platform to support multiple ceremony types and built configurable template automation, client file uploads, and invitation workflows."
+    ]
+  },
+  {
+    "role": "Backend Engineer (Contract)",
+    "company": "Scrubbe",
+    "location": "United Kingdom, Remote",
     "duration": "Jul 2025 – Aug 2025",
-    "info1": "Led development of Ezra, an internal AI tool that translates natural language into machine-executable actions, improving developer productivity.",
-    "info2": "Integrated third-party SaaS services and incident management workflows to automate alerts, track failed deployments, and ensure operational reliability."
+    "technologies": ["TypeScript", "Node.js", "Prisma", "REST APIs", "Slack API", "GitHub Actions", "GitLab"],
+    "highlights": [
+      "Led development of Ezra, an internal AI tool translating natural-language requests into executable actions.",
+      "Designed incident-management workflows with SLA tracking, automated alerts, and structured resolution processes.",
+      "Integrated deployment and collaboration services to detect failed builds, create incidents, and update status through Slack."
+    ]
   },
   {
-    "role": "Co-founder / CTO",
-    "duration": "Jun 2025 – Aug 2025",
-    "info1": "Architected and oversaw the entire engineering workflow, leading product and technical strategy for a developer tooling startup focused on automation, AI, and containerized deployment.",
-    "info2": "Oversaw end-to-end delivery of MVPs including backend APIs, frontend dashboards, and developer documentation."
-  },
-  {
-    "role": "Full-stack Engineer",
+    "role": "Full-stack Engineer (Freelance)",
+    "company": "Independent Clients",
+    "location": "Ikeja, Nigeria",
     "duration": "Jan 2024 – Apr 2025",
-    "info1": "Developed a full-fledged e-commerce platform using React and TypeScript (Express.js), containerized with Docker.",
-    "info2": "Optimized caching with Redis and frontend improvements, cutting server costs by 60% while boosting performance."
-  },
-  {
-    "role": "Backend Engineer (Freelance)",
-    "duration": "Apr 2024 – Jun 2024",
-    "info1": "Contributed to the PartnerStack codebase by building features and improving backend reliability using Spring Boot and PostgreSQL.",
-    "info2": "Collaborated remotely with full-time engineers to deliver APIs handling onboarding, tracking, and commission logic at scale."
-  },
-  {
-    "role": "System Automation Engineer",
-    "duration": "May 2024",
-    "info1": "Automated the CLI-based installation of AI facial recognition and avatar-swapping tools.",
-    "info2": "Streamlined manual setup processes into a single-command script for non-technical users."
+    "technologies": ["React", "TypeScript", "Express.js", "Redis", "Docker"],
+    "highlights": [
+      "Developed a containerized e-commerce platform with session management and product caching using Redis.",
+      "Optimized server-side caching and frontend product delivery, improving performance and reducing infrastructure overhead."
+    ]
   },
   {
     "role": "Software Developer",
+    "company": "The Tann Mann Gaadi",
+    "location": "Remote",
     "duration": "Jan 2024 – Mar 2024",
-    "info1": "Collaborated with backend engineers to streamline integration using shared API contracts.",
-    "info2": "Built responsive, pixel-perfect UIs from Figma, while actively participating in Scrum standups to align with team goals."
+    "technologies": ["Frontend development", "API integrations", "Figma"],
+    "highlights": [
+      "Improved integration reliability by aligning frontend implementations with shared API contracts and delivered responsive interfaces from Figma designs."
+    ]
   }
 ]
