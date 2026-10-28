@@ -147,7 +147,7 @@
   {
     "id": "06",
     "applicationName": "Jottaware",
-    "imageUrl": "/jota-image.png",
+    "imageUrl": "/jota-image.webp",
     "videoUrl": "",
     "hasVideo": false,
     "techStacks": ["Go", "Fiber", "PostgreSQL", "GORM", "WebSockets", "React", "TypeScript"],

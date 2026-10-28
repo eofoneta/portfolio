@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { FaGithub, FaLock } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
@@ -47,7 +47,6 @@ const Section = ({
 
 const ProjectDescription = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
   const currentIndex = projects.findIndex((project) => project.id === id);
   const project = projects[currentIndex];
@@ -131,25 +130,25 @@ const ProjectDescription = () => {
 
       {/* ── STICKY NAV BAR ── */}
       <div className="sticky top-0 z-30 backdrop-blur-sm border-b border-[#ffffff08] px-5 sm:px-10 md:px-20 py-4 flex justify-between items-center">
-        <button
-          onClick={() => navigate("/")}
+        <Link
+          to="/"
           className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest text-muted hover:text-[#c9566a] transition-colors duration-300 group"
         >
           <FaArrowLeftLong size={11} className="group-hover:-translate-x-0.5 transition-transform duration-300" />
           <span>Home</span>
-        </button>
+        </Link>
 
         <p className="oswald-font uppercase text-sm hidden sm:block tracking-wide">
           {project.applicationName}
         </p>
 
-        <button
-          onClick={() => navigate(`/project/${nextProject.id}`)}
+        <Link
+          to={`/project/${nextProject.id}`}
           className="flex items-center gap-2 oswald-light uppercase text-xs tracking-widest text-muted hover:text-[#c9566a] transition-colors duration-300 group"
         >
           <span>Next project</span>
           <FaArrowRightLong size={11} className="-rotate-45 group-hover:translate-x-0.5 transition-transform duration-300" />
-        </button>
+        </Link>
       </div>
 
       <div className="px-5 sm:px-10 md:px-20 pb-32 relative">
@@ -312,8 +311,8 @@ const ProjectDescription = () => {
               <p className="oswald-light uppercase text-[10px] tracking-widest text-muted mb-2">
                 Next project · <span className="text-[#7a1c2e]">{nextMeta.organization}</span>
               </p>
-              <button
-                onClick={() => navigate(`/project/${nextProject.id}`)}
+              <Link
+                to={`/project/${nextProject.id}`}
                 className="group flex items-center gap-3 oswald-font uppercase text-2xl lg:text-3xl text-strong hover:text-[#c9566a] transition-colors duration-300 text-left"
               >
                 {nextProject.applicationName}
@@ -321,7 +320,7 @@ const ProjectDescription = () => {
                   size={16}
                   className="-rotate-45 group-hover:translate-x-1 transition-transform duration-300 shrink-0"
                 />
-              </button>
+              </Link>
             </div>
           </div>
         </div>

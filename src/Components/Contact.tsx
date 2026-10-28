@@ -43,13 +43,13 @@ const Contact = () => {
       className="gap-x-2 w-full flex flex-row md:flex-nowrap justify-center items-center pt-20 px-5"
     >
       <div className="w-[500px]">
-        <h1
+        <h2
           id="contact-header"
           ref={scrollContactRef}
           className="text-xl lg:text-6xl md:text-4xl sm:text-2xl oswald-font pb-2"
         >
           Contact
-        </h1>
+        </h2>
         <a
           href="mailto:emmanuel@eofoneta.com"
           className="font-bold pb-4 hover:text-[#7a1c2e] transition-colors duration-300"

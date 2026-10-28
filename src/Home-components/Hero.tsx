@@ -94,7 +94,7 @@ const Hero = () => {
           {/* mobile avatar row */}
           <div className="mt-6 flex gap-3 items-center">
             <img
-              src="/me-1.png"
+              src="/me-1.webp"
               alt="Emmanuel Ofoneta"
               className="w-16 h-16 object-cover object-top rounded-full transition-all duration-700 hover:grayscale border border-[#7a1c2e60]"
             />
@@ -116,12 +116,12 @@ const Hero = () => {
 
             {/* LEFT: stacked headlines */}
             <div className="flex-1 min-w-0">
-              {/* LINE 1 */}
-              <h1
-                className="oswald-font uppercase hero-headline leading-[1.05]"
-                id="target-1"
-              >
-                I build systems that power products,
+              {/* LINE 1 — the visually hidden name gives search engines and screen readers context */}
+              <h1 className="oswald-font uppercase hero-headline leading-[1.05]">
+                <span className="sr-only">Emmanuel Ofoneta, Software Engineer — </span>
+                <span id="target-1" className="block">
+                  I build systems that power products,
+                </span>
               </h1>
 
               {/* LINE 2: inverted bar flush below line 1 */}
@@ -156,8 +156,8 @@ const Hero = () => {
             <div className="relative shrink-0 w-[220px] lg:w-[280px]">
               <FramedImage
                 id="hero-img-inner"
-                src="/me-1.png"
-                alt="Portrait"
+                src="/me-1.webp"
+                alt="Emmanuel Ofoneta, software engineer, coding at his desk in Lagos"
                 height="340px"
                 objectPosition="top"
                 hoverGreyscale={true}

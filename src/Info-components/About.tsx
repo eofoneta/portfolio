@@ -72,9 +72,9 @@ const About = () => {
     <div>
       {/* HEADER */}
       <div className="overflow-hidden max-w-[800px] mb-10 md:mb-20 sm:text-lg md:text-xl lg:text-2xl">
-        <h2 id="about-div-1" className="oswald-font mb-4">
-          Info
-        </h2>
+        <h1 id="about-div-1" className="oswald-font mb-4">
+          Info <span className="sr-only">— About Emmanuel Ofoneta, Software Engineer</span>
+        </h1>
         <p id="about-div-2" className="font-semibold oswald-light">
           I'm passionate about developing seamless and impressive web
           applications with secure web servers and great <b>User experience.</b>
@@ -113,8 +113,8 @@ const About = () => {
 
             <FramedImage
               id="wanted-img"
-              src="/me-2.png"
-              alt="Portrait"
+              src="/me-2.webp"
+              alt="Portrait of Emmanuel Ofoneta, software engineer"
               height="220px"
               objectPosition="center"
             />
@@ -151,8 +151,8 @@ const About = () => {
             <div className="relative mb-8">
               <FramedImage
                 id="intro-img"
-                src="/me-3.png"
-                alt="Portrait"
+                src="/me-3.webp"
+                alt="Emmanuel Ofoneta in Lagos, Nigeria"
                 height="380px"
                 objectPosition="top"
                 imgClassName="grayscale"

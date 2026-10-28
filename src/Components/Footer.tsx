@@ -8,7 +8,7 @@ const Footer = () => {
           <Link className="hover:text-shadow-glow" to={"/"}>
             Home
           </Link>
-          <Link className="hover:text-shadow-glow" to={"info"}>
+          <Link className="hover:text-shadow-glow" to={"/info"}>
             Info
           </Link>
         </div>
@@ -31,13 +31,13 @@ const Footer = () => {
           </a>
         </div>
         <p className="w-full font-bold">
-          © 2026 Emmanuel ofoneta. All Rights Reserved.
+          © 2026 Emmanuel Ofoneta. All Rights Reserved.
         </p>
       </div>
       <div className="w-[500px]">
-        <h1 className="lg:text-5xl md:text-4xl sm:text-2xl oswald-font">
+        <p className="lg:text-5xl md:text-4xl sm:text-2xl oswald-font">
           Emmanuel <br className="hidden lg:block" /> ofoneta
-        </h1>
+        </p>
       </div>
     </div>
   );

@@ -75,12 +75,12 @@ const Projects = ({ projects }: Projectsprops) => {
         ref={triggerRef}
         className="overflow-hidden px-5 lg:my-16 md:my-14 my-8 flex items-end justify-between border-b border-[#7a1c2e30] pb-4"
       >
-        <h1
+        <h2
           id="text"
           className="oswald-font text-3xl md:text-5xl lg:text-7xl text-strong/90"
         >
           Selected Works
-        </h1>
+        </h2>
         <p className="oswald-light uppercase text-xs tracking-widest text-[#7a1c2e] hidden sm:block">
           {projects.length} projects
         </p>
